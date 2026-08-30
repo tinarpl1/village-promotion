@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tentang Desa - Website Desa Mensere</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' }</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>.no-scrollbar::-webkit-scrollbar { display: none; } .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }</style>
+</head>
+<body class="bg-stone-50/50 dark:bg-gray-950 text-gray-800 dark:text-gray-100 font-sans antialiased transition-colors duration-300">
+  
+  <!-- Floating Dark Mode -->
+  <div class="fixed bottom-5 right-5 z-50">
+    <button onclick="document.documentElement.classList.toggle('dark')" class="p-3 bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 text-white rounded-full shadow-xl hover:scale-110 transition duration-300 flex items-center justify-center">
+      <i class="fa-solid fa-moon text-base dark:hidden"></i>
+      <i class="fa-solid fa-sun text-base hidden dark:block"></i>
+    </button>
+  </div>
+
+  <!-- Navbar Lengkap (Desktop & Mobile) -->
+  <nav class="fixed top-3 left-1/2 -translate-x-1/2 w-[92%] max-w-5xl z-50 bg-white/85 dark:bg-gray-900/85 backdrop-blur-md text-gray-800 dark:text-white px-4 md:px-6 py-2.5 shadow-md border border-gray-200/60 dark:border-gray-800 rounded-full transition-all">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <a href="index.html" class="text-base md:text-lg font-bold tracking-tight flex items-center gap-1.5 group">
+        <i class="fa-solid fa-tree text-emerald-600 group-hover:rotate-12 transition-transform duration-300"></i> Desa Mensere.
+      </a>
+      
+      <!-- Menu Desktop -->
+      <ul class="hidden md:flex space-x-5 text-xs font-medium text-gray-600 dark:text-gray-300">
+        <li><a href="index.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Beranda</a></li>
+        <li><a href="tentang.html" class="text-emerald-600 dark:text-emerald-400 font-bold">Tentang</a></li>
+        <li><a href="potensi.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Potensi</a></li>
+        <li><a href="pendidikan.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Pendidikan</a></li>
+        <li><a href="fasilitas.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Fasilitas</a></li>
+        <li><a href="aparatur.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Aparatur & Kontak</a></li>
+      </ul>
+
+      <a href="aparatur.html#lokasi" class="bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 text-white px-3.5 py-1.5 rounded-full text-[11px] font-bold shadow-sm flex items-center gap-1.5 shrink-0">
+        <span>Hubungi Kami</span> <i class="fa-solid fa-phone text-[9px]"></i>
+      </a>
+    </div>
+
+    <!-- Menu Mobile Scrollable -->
+    <div class="md:hidden flex space-x-4 text-[11px] font-medium overflow-x-auto whitespace-nowrap pt-2 pb-0.5 mt-1 border-t border-gray-100 dark:border-gray-800 no-scrollbar text-gray-600 dark:text-gray-300">
+      <a href="index.html" class="hover:text-emerald-600 transition">Beranda</a>
+      <a href="tentang.html" class="text-emerald-600 font-bold">Tentang</a>
+      <a href="potensi.html" class="hover:text-emerald-600 transition">Potensi</a>
+      <a href="pendidikan.html" class="hover:text-emerald-600 transition">Pendidikan</a>
+      <a href="fasilitas.html" class="hover:text-emerald-600 transition">Fasilitas</a>
+      <a href="aparatur.html" class="hover:text-emerald-600 transition">Aparatur & Kontak</a>
+    </div>
+  </nav>
+
+  <!-- Konten Tentang -->
+  <section class="py-28 px-4 md:px-8 bg-white dark:bg-gray-900 min-h-screen">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7">
+          <span class="text-[11px] font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-3 py-1 rounded-md">Profil Desa</span>
+          <h2 class="text-2xl md:text-3xl font-extrabold mt-3 text-gray-900 dark:text-white">Mengenal Lebih Dekat Desa Mensere</h2>
+          <p class="text-gray-600 dark:text-gray-400 mt-3 leading-relaxed text-xs md:text-sm">
+            Desa Mensere terletak di wilayah Kecamatan Tebas, Kabupaten Sambas. Desa ini kaya akan potensi pertanian, sektor perkebunan rakyat yang produktif, serta kearifan budaya Melayu Sambas.
+          </p>
+          
+          <div class="grid grid-cols-3 gap-3 my-6">
+            <div class="bg-stone-50 dark:bg-gray-800 p-3 rounded-2xl text-center border dark:border-gray-700">
+              <h4 class="font-bold text-base md:text-lg text-emerald-600">3.049+</h4>
+              <p class="text-[10px] text-gray-500">Jiwa Penduduk</p>
+            </div>
+            <div class="bg-stone-50 dark:bg-gray-800 p-3 rounded-2xl text-center border dark:border-gray-700">
+              <h4 class="font-bold text-base md:text-lg text-emerald-600">4,50 km²</h4>
+              <p class="text-[10px] text-gray-500">Luas Wilayah</p>
+            </div>
+            <div class="bg-stone-50 dark:bg-gray-800 p-3 rounded-2xl text-center border dark:border-gray-700">
+              <h4 class="font-bold text-base md:text-lg text-emerald-600">79461</h4>
+              <p class="text-[10px] text-gray-500">Kode Pos</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="lg:col-span-5">
+          <div class="overflow-hidden rounded-2xl shadow-lg border dark:border-gray-800">
+            <img class="w-full h-[320px] object-cover" src="jalan.jpg" alt="Suasana Desa Mensere">
+          </div>
+        </div>
+      </div>
+
+      <!-- Wilayah Dusun -->
+      <div class="mt-16">
+        <div class="text-center max-w-md mx-auto mb-8">
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white">Pembagian Wilayah Dusun & Ke-RT-an</h3>
+          <p class="text-[11px] text-gray-500 mt-0.5">Total membawahi 3 Dusun, 8 RW, dan 18 RT</p>
+        </div>
+        
+        <div class="space-y-3 max-w-2xl mx-auto">
+          <!-- Dusun 1 -->
+          <div class="bg-stone-50 dark:bg-gray-800 p-4 rounded-2xl border dark:border-gray-700 flex flex-col gap-3">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-4"><span class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 font-extrabold text-xs flex items-center justify-center">01</span><h4 class="font-bold text-sm">Dusun Bumi Asih</h4></div>
+              <div class="flex gap-1.5"><span class="bg-white dark:bg-gray-900 text-[10px] font-bold px-2.5 py-1 rounded-lg border dark:border-gray-700">3 RW</span><span class="bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg">7 RT</span></div>
+            </div>
+            <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">Dusun Bumi Asih merupakan salah satu wilayah administratif di Desa Mensere yang dihuni oleh masyarakat dengan berbagai aktivitas dan rutinitas harian yang beragam.</p>
+          </div>
+          
+          <!-- Dusun 2 -->
+          <div class="bg-stone-50 dark:bg-gray-800 p-4 rounded-2xl border dark:border-gray-700 flex flex-col gap-3">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-4"><span class="w-10 h-10 rounded-xl bg-emerald-700 text-white font-extrabold text-xs flex items-center justify-center">02</span><h4 class="font-bold text-sm">Dusun Lestari</h4></div>
+              <div class="flex gap-1.5"><span class="bg-white dark:bg-gray-900 text-[10px] font-bold px-2.5 py-1 rounded-lg border dark:border-gray-700">3 RW</span><span class="bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg">6 RT</span></div>
+            </div>
+            <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">Dusun Lestari menjadi bagian dari wilayah Desa Mensere yang mencakup kawasan permukiman warga dengan suasana lingkungan yang tertata.</p>
+          </div>
+
+          <!-- Dusun 3 -->
+          <div class="bg-stone-50 dark:bg-gray-800 p-4 rounded-2xl border dark:border-gray-700 flex flex-col gap-3">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-4"><span class="w-10 h-10 rounded-xl bg-stone-200 dark:bg-gray-700 font-extrabold text-xs flex items-center justify-center">03</span><h4 class="font-bold text-sm">Dusun Mekar Mandiri</h4></div>
+              <div class="flex gap-1.5"><span class="bg-white dark:bg-gray-900 text-[10px] font-bold px-2.5 py-1 rounded-lg border dark:border-gray-700">2 RW</span><span class="bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg">5 RT</span></div>
+            </div>
+            <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">Dusun Mekar Mandiri merupakan salah satu dusun di Desa Mensere yang juga berperan dalam melengkapi struktur pembagian wilayah desa.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-emerald-950 text-white py-8 px-4 text-center text-xs">
+    <p>© 2026 Desa Mensere. All rights reserved.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fasilitas Publik - Website Desa Mensere</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' }</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>.no-scrollbar::-webkit-scrollbar { display: none; } .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }</style>
+</head>
+<body class="bg-stone-50/50 dark:bg-gray-950 text-gray-800 dark:text-gray-100 font-sans antialiased transition-colors duration-300">
+
+  <!-- Floating Dark Mode -->
+  <div class="fixed bottom-5 right-5 z-50">
+    <button onclick="document.documentElement.classList.toggle('dark')" class="p-3 bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 text-white rounded-full shadow-xl hover:scale-110 transition duration-300 flex items-center justify-center">
+      <i class="fa-solid fa-moon text-base dark:hidden"></i>
+      <i class="fa-solid fa-sun text-base hidden dark:block"></i>
+    </button>
+  </div>
+
+  <!-- Navbar Lengkap (Desktop & Mobile) -->
+  <nav class="fixed top-3 left-1/2 -translate-x-1/2 w-[92%] max-w-5xl z-50 bg-white/85 dark:bg-gray-900/85 backdrop-blur-md text-gray-800 dark:text-white px-4 md:px-6 py-2.5 shadow-md border border-gray-200/60 dark:border-gray-800 rounded-full transition-all">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <a href="index.html" class="text-base md:text-lg font-bold tracking-tight flex items-center gap-1.5 group">
+        <i class="fa-solid fa-tree text-emerald-600 group-hover:rotate-12 transition-transform duration-300"></i> Desa Mensere.
+      </a>
+      
+      <!-- Menu Desktop -->
+      <ul class="hidden md:flex space-x-5 text-xs font-medium text-gray-600 dark:text-gray-300">
+        <li><a href="index.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Beranda</a></li>
+        <li><a href="tentang.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Tentang</a></li>
+        <li><a href="potensi.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Potensi</a></li>
+        <li><a href="pendidikan.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Pendidikan</a></li>
+        <li><a href="fasilitas.html" class="text-emerald-600 dark:text-emerald-400 font-bold">Fasilitas</a></li>
+        <li><a href="aparatur.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Aparatur & Kontak</a></li>
+      </ul>
+
+      <a href="aparatur.html#lokasi" class="bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 text-white px-3.5 py-1.5 rounded-full text-[11px] font-bold shadow-sm flex items-center gap-1.5 shrink-0">
+        <span>Hubungi Kami</span> <i class="fa-solid fa-phone text-[9px]"></i>
+      </a>
+    </div>
+
+    <!-- Menu Mobile Scrollable -->
+    <div class="md:hidden flex space-x-4 text-[11px] font-medium overflow-x-auto whitespace-nowrap pt-2 pb-0.5 mt-1 border-t border-gray-100 dark:border-gray-800 no-scrollbar text-gray-600 dark:text-gray-300">
+      <a href="index.html" class="hover:text-emerald-600 transition">Beranda</a>
+      <a href="tentang.html" class="hover:text-emerald-600 transition">Tentang</a>
+      <a href="potensi.html" class="hover:text-emerald-600 transition">Potensi</a>
+      <a href="pendidikan.html" class="hover:text-emerald-600 transition">Pendidikan</a>
+      <a href="fasilitas.html" class="text-emerald-600 font-bold">Fasilitas</a>
+      <a href="aparatur.html" class="hover:text-emerald-600 transition">Aparatur & Kontak</a>
+    </div>
+  </nav>
+
+  <!-- Konten Fasilitas -->
+  <section class="py-28 px-4 md:px-8 bg-white dark:bg-gray-900 min-h-screen">
+    <div class="max-w-5xl mx-auto text-center md:text-left">
+      <div class="mb-8">
+        <span class="text-[11px] font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-3.5 py-1 rounded-md">Sarana Publik</span>
+        <h2 class="text-2xl md:text-3xl font-extrabold mt-3 text-gray-900 dark:text-white">Fasilitas Desa Mensere</h2>
+        <p class="text-gray-600 dark:text-gray-400 mt-2 text-xs">Berbagai fasilitas penunjang kegiatan pelayanan masyarakat, keagamaan, dan olahraga.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 text-left">
+        <div class="bg-stone-50 dark:bg-gray-800 rounded-2xl overflow-hidden border dark:border-gray-700 shadow-md">
+          <img class="w-full h-40 object-cover" src="balai desa.jpg" alt="Balai Desa">
+          <div class="p-5">
+            <span class="text-[9px] font-bold uppercase bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 px-2.5 py-0.5 rounded-full">Pemerintahan</span>
+            <h3 class="font-bold text-sm mt-2 text-gray-900 dark:text-white">Kantor Balai Desa</h3>
+            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-1">Pusat pelayanan administrasi kependudukan.</p>
+          </div>
+        </div>
+        <div class="bg-stone-50 dark:bg-gray-800 rounded-2xl overflow-hidden border dark:border-gray-700 shadow-md">
+          <img class="w-full h-40 object-cover" src="masjid.jpg" alt="Masjid">
+          <div class="p-5">
+            <span class="text-[9px] font-bold uppercase bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 px-2.5 py-0.5 rounded-full">Keagamaan</span>
+            <h3 class="font-bold text-sm mt-2 text-gray-900 dark:text-white">Masjid Al-Ikhlas</h3>
+            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-1">Sarana ibadah utama dan pusat keagamaan.</p>
+            </div>
+        </div>
+        <div class="bg-stone-50 dark:bg-gray-800 rounded-2xl overflow-hidden border dark:border-gray-700 shadow-md">
+          <img class="w-full h-40 object-cover" src="lapangan sepak bola.jpg" alt="Lapangan">
+          <div class="p-5">
+            <span class="text-[9px] font-bold uppercase bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 px-2.5 py-0.5 rounded-full">Olahraga</span>
+            <h3 class="font-bold text-sm mt-2 text-gray-900 dark:text-white">Lapangan Olahraga</h3>
+            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-1">Sarana olahraga outdoor dan turnamen pemuda.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-emerald-950 text-white py-8 px-4 text-center text-xs">
+    <p>© 2026 Desa Mensere. All rights reserved.</p>
+  </footer>
+</body>
+</html>
