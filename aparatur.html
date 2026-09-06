@@ -214,7 +214,7 @@
     </div>
   </section>
 
-  <!-- FORMULIR BUKU TAMU / ASPIRASI (TERHUBUNG KE SHEETDB) -->
+  <!-- FORMULIR BUKU TAMU / ASPIRASI (DENGAN TIMESTAMP OTOMATIS) -->
   <section class="py-8 px-4 md:px-8 bg-transparent">
     <div class="max-w-xl mx-auto bg-stone-50 dark:bg-gray-800 p-6 md:p-8 rounded-3xl border border-gray-200/70 dark:border-gray-700 shadow-md">
       <div class="text-center mb-6">
@@ -239,7 +239,7 @@
     </div>
   </section>
 
-  <!-- Script untuk koneksi ke SheetDB -->
+  <!-- Script untuk koneksi ke SheetDB + Otomatis Timestamp -->
   <script>
     const apiURL = 'https://sheetdb.io/api/v1/y2eqniqcbebc0';
     const form = document.getElementById('formDatabase');
@@ -250,7 +250,16 @@
       btnKirim.innerText = "Mengirim...";
       btnKirim.disabled = true;
 
+      // Membuat format tanggal dan waktu otomatis
+      const sekarang = new Date();
+      const waktuLokal = sekarang.toLocaleString('id-ID', {
+        dateStyle: 'medium',
+        timeStyle: 'medium'
+      });
+
+      // Mengambil data dari form dan menambahkan kolom Timestamp
       const formData = new FormData(form);
+      formData.append('data[Timestamp]', waktuLokal);
 
       fetch(apiURL, {
         method: 'POST',
