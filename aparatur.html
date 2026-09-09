@@ -214,7 +214,7 @@
     </div>
   </section>
 
-  <!-- FORMULIR BUKU TAMU / ASPIRASI (DENGAN TIMESTAMP OTOMATIS) -->
+  <!-- FORMULIR BUKU TAMU / ASPIRASI -->
   <section class="py-8 px-4 md:px-8 bg-transparent">
     <div class="max-w-xl mx-auto bg-stone-50 dark:bg-gray-800 p-6 md:p-8 rounded-3xl border border-gray-200/70 dark:border-gray-700 shadow-md">
       <div class="text-center mb-6">
@@ -226,11 +226,11 @@
       <form id="formDatabase" class="space-y-4 text-left">
         <div>
           <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Nama Lengkap</label>
-          <input type="text" name="data[Nama]" required placeholder="Masukkan nama Anda..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500">
+          <input type="text" id="nama" name="nama" required placeholder="Masukkan nama Anda..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500">
         </div>
         <div>
           <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Pesan / Masukan</label>
-          <textarea name="data[Pesan]" rows="3" required placeholder="Tuliskan pesan atau masukan untuk desa..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500"></textarea>
+          <textarea id="pesan" name="pesan" rows="3" required placeholder="Tuliskan pesan atau masukan untuk desa..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500"></textarea>
         </div>
         <button type="submit" id="btnKirim" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-2xl text-xs transition duration-300 shadow-lg shadow-emerald-600/20">
           Kirim ke Database
@@ -239,9 +239,9 @@
     </div>
   </section>
 
-  <!-- Script untuk koneksi ke SheetDB + Otomatis Timestamp -->
+  <!-- Script untuk koneksi ke Google Apps Script -->
   <script>
-    const apiURL = 'https://sheetdb.io/api/v1/y2eqniqcbebc0';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxmTvRPqDjZrs4NAzbVaRCQPg1hiJixQ8CiuGnJ1pfBEY-gZdnKVUDBIOEry3fUhKAX2w/exec';
     const form = document.getElementById('formDatabase');
     const btnKirim = document.getElementById('btnKirim');
 
@@ -250,23 +250,20 @@
       btnKirim.innerText = "Mengirim...";
       btnKirim.disabled = true;
 
-      // Membuat format tanggal dan waktu otomatis
-      const sekarang = new Date();
-      const waktuLokal = sekarang.toLocaleString('id-ID', {
-        dateStyle: 'medium',
-        timeStyle: 'medium'
-      });
+      const dataKirim = {
+        nama: document.getElementById('nama').value,
+        pesan: document.getElementById('pesan').value
+      };
 
-      // Mengambil data dari form dan menambahkan kolom Timestamp
-      const formData = new FormData(form);
-      formData.append('data[Timestamp]', waktuLokal);
-
-      fetch(apiURL, {
+      fetch(scriptURL, {
         method: 'POST',
-        body: formData
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dataKirim)
       })
-      .then(response => response.json())
-      .then(data => {
+      .then(() => {
         alert('Terima kasih! Pesan berhasil dikirim dan tersimpan di database.');
         form.reset();
         btnKirim.innerText = "Kirim ke Database";
