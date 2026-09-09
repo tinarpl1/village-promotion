@@ -239,9 +239,10 @@
     </div>
   </section>
 
-    <!-- Script untuk koneksi ke Google Apps Script -->
+      <!-- Script untuk koneksi ke SheetDB -->
   <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxn18rqs3dg7iytepKBvUoIZyh72qoOoX8iMtmYtM5ijeWBAl9AQhirJO4KNlXfLdiejQ/exec';
+    const sheetdbURL = 'https://sheetdb.io/api/v1/lfjq7bpc1kpr4';
+    
     const form = document.getElementById('formDatabase');
     const btnKirim = document.getElementById('btnKirim');
 
@@ -251,19 +252,25 @@
       btnKirim.disabled = true;
 
       const dataKirim = {
-        nama: document.getElementById('nama').value,
-        pesan: document.getElementById('pesan').value
+        data: [
+          {
+            "Timestamp": new Date().toLocaleString(),
+            "Nama": document.getElementById('nama').value,
+            "Pesan": document.getElementById('pesan').value
+          }
+        ]
       };
 
-      fetch(scriptURL, {
+      fetch(sheetdbURL, {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
+          'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(dataKirim)
       })
-      .then(() => {
+      .then(response => response.json())
+      .then(data => {
         alert('Terima kasih! Pesan berhasil dikirim dan tersimpan di database.');
         form.reset();
         btnKirim.innerText = "Kirim ke Database";
