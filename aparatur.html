@@ -214,7 +214,7 @@
     </div>
   </section>
 
-  <!-- FORMULIR BUKU TAMU / ASPIRASI (ANTI-CORS METHOD) -->
+  <!-- FORMULIR BUKU TAMU -->
 <section class="py-8 px-4 md:px-8 bg-transparent">
   <div class="max-w-xl mx-auto bg-stone-50 dark:bg-gray-800 p-6 md:p-8 rounded-3xl border border-gray-200/70 dark:border-gray-700 shadow-md">
     <div class="text-center mb-6">
@@ -223,15 +223,14 @@
       <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Data Anda akan langsung tersimpan ke database desa.</p>
     </div>
 
-    <!-- Gunakan action link apps script terbaru dan target ke hidden iframe -->
-    <form id="formDatabase" action="https://script.google.com/macros/s/AKfycbxF2XNWYMxVFsDLZ_b0VKnadArbt7qmr1kjhykcCSPmYgDv180niDXuhY4ZlHixKzA-/exec" method="POST" target="hidden_iframe" class="space-y-4 text-left">
+    <form id="formDatabase" class="space-y-4 text-left">
       <div>
         <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Nama Lengkap</label>
-        <input type="text" name="Nama" required placeholder="Masukkan nama Anda..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500">
+        <input type="text" id="inputNama" required placeholder="Masukkan nama Anda..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500">
       </div>
       <div>
         <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Pesan / Masukan</label>
-        <textarea name="Pesan" rows="3" required placeholder="Tuliskan pesan atau masukan untuk desa..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500"></textarea>
+        <textarea id="inputPesan" rows="3" required placeholder="Tuliskan pesan atau masukan untuk desa..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500"></textarea>
       </div>
       <button type="submit" id="btnKirim" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-2xl text-xs transition duration-300 shadow-lg shadow-emerald-600/20">
         Kirim ke Database
@@ -240,31 +239,46 @@
   </div>
 </section>
 
-<!-- Iframe Tersembunyi untuk Mencegah Error CORS -->
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-
 <script>
+  // Masukin link Apps Script lu yang aktif berakhiran /exec
+  const webAppUrl = 'https://script.google.com/macros/s/AKfycbxF2XNWYMxVFsDLZ_b0VKnadArbt7qmr1kjhykcCSPmYgDv180niDXuhY4ZlHixKzA-/exec';
   const form = document.getElementById('formDatabase');
   const btnKirim = document.getElementById('btnKirim');
-  let isSubmitted = false;
 
-  form.addEventListener('submit', function() {
-    isSubmitted = true;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
     btnKirim.innerText = "Mengirim...";
     btnKirim.disabled = true;
-  });
 
-  // Begitu data masuk ke google sheets via iframe, jalankan notifikasi sukses
-  document.getElementById('hidden_iframe').onload = function() {
-    if (isSubmitted) {
-      alert('Terima kasih! Pesan berhasil dikirim dan tersimpan di database.');
+    const dataKirim = {
+      Nama: document.getElementById('inputNama').value,
+      Pesan: document.getElementById('inputPesan').value
+    };
+
+    // Pakai no-cors biar ngebut langsung masuk tanpa jeda error CORS
+    fetch(webAppUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataKirim)
+    })
+    .then(() => {
+      alert('Terima kasih! Pesan berhasil dikirim.');
       form.reset();
       btnKirim.innerText = "Kirim ke Database";
       btnKirim.disabled = false;
-      isSubmitted = false;
-    }
-  };
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Terjadi kendala koneksi.');
+      btnKirim.innerText = "Kirim ke Database";
+      btnKirim.disabled = false;
+    });
+  });
 </script>
+
   
   <!-- Tombol Kembali ke Beranda -->
   <div class="max-w-5xl mx-auto px-4 pb-16 pt-6">
