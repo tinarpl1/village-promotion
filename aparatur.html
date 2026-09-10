@@ -214,7 +214,7 @@
     </div>
   </section>
 
-  <!-- FORMULIR BUKU TAMU -->
+<!-- FORMULIR BUKU TAMU SHEETDB -->
 <section class="py-8 px-4 md:px-8 bg-transparent">
   <div class="max-w-xl mx-auto bg-stone-50 dark:bg-gray-800 p-6 md:p-8 rounded-3xl border border-gray-200/70 dark:border-gray-700 shadow-md">
     <div class="text-center mb-6">
@@ -240,45 +240,57 @@
 </section>
 
 <script>
-  // Masukin link Apps Script lu yang aktif berakhiran /exec
-  const webAppUrl = 'https://script.google.com/macros/s/AKfycbxF2XNWYMxVFsDLZ_b0VKnadArbt7qmr1kjhykcCSPmYgDv180niDXuhY4ZlHixKzA-/exec';
+  // Link API SheetDB lu
+  const apiURL = 'https://sheetdb.io/api/v1/H6gfps10dd6m6';
   const form = document.getElementById('formDatabase');
   const btnKirim = document.getElementById('btnKirim');
 
-  form.addEventListener('submit', function(e) {
+  form.addEventListener('submit', e => {
     e.preventDefault();
     btnKirim.innerText = "Mengirim...";
     btnKirim.disabled = true;
 
+    // Ambil waktu lokal otomatis
+    const sekarang = new Date();
+    const waktuLokal = sekarang.toLocaleString('id-ID', {
+      dateStyle: 'medium',
+      timeStyle: 'medium'
+    });
+
+    // Format JSON khusus untuk SheetDB
     const dataKirim = {
-      Nama: document.getElementById('inputNama').value,
-      Pesan: document.getElementById('inputPesan').value
+      data: [
+        {
+          "Timestamp": waktuLokal,
+          "Nama": document.getElementById('inputNama').value,
+          "Pesan": document.getElementById('inputPesan').value
+        }
+      ]
     };
 
-    // Pakai no-cors biar ngebut langsung masuk tanpa jeda error CORS
-    fetch(webAppUrl, {
+    fetch(apiURL, {
       method: 'POST',
-      mode: 'no-cors',
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(dataKirim)
     })
-    .then(() => {
-      alert('Terima kasih! Pesan berhasil dikirim.');
+    .then(response => response.json())
+    .then(data => {
+      alert('Terima kasih! Pesan berhasil dikirim dan tersimpan di database.');
       form.reset();
       btnKirim.innerText = "Kirim ke Database";
       btnKirim.disabled = false;
     })
     .catch(error => {
-      console.error('Error:', error);
-      alert('Terjadi kendala koneksi.');
+      console.error('Error!', error);
+      alert('Gagal mengirim pesan, silakan coba lagi.');
       btnKirim.innerText = "Kirim ke Database";
       btnKirim.disabled = false;
     });
   });
 </script>
-
   
   <!-- Tombol Kembali ke Beranda -->
   <div class="max-w-5xl mx-auto px-4 pb-16 pt-6">
