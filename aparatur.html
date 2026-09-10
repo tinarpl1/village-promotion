@@ -239,9 +239,8 @@
     </div>
   </section>
 
-    <!-- Script untuk koneksi ke SheetDB (Stabil JSON Format) -->
-  <script>
-    const apiURL = 'https://sheetdb.io/api/v1/c85u83vz8j8mb';
+      <script>
+    const webAppUrl = 'https://script.google.com/macros/s/AKfycbyZg0Gw4F7N-V_DpmPru1wbtWpV9ukmLn2QwI_tB4y68HuommfPo0DKoWThBGEkBqhA/exec';
     const form = document.getElementById('formDatabase');
     const btnKirim = document.getElementById('btnKirim');
 
@@ -250,37 +249,22 @@
       btnKirim.innerText = "Mengirim...";
       btnKirim.disabled = true;
 
-      // Ambil nilai input secara langsung
-      const namaVal = document.querySelector('input[name="data[Nama]"]').value;
-      const pesanVal = document.querySelector('textarea[name="data[Pesan]"]').value;
+      // Ambil data langsung berdasarkan name input di form lu
+      const namaVal = form.querySelector('input[name="data[Nama]"]').value;
+      const pesanVal = form.querySelector('textarea[name="data[Pesan]"]').value;
 
-      const sekarang = new Date();
-      const waktuLokal = sekarang.toLocaleString('id-ID', {
-        dateStyle: 'medium',
-        timeStyle: 'medium'
-      });
-
-      // Format JSON standar SheetDB
       const dataKirim = {
-        data: [
-          {
-            "Timestamp": waktuLokal,
-            "Nama": namaVal,
-            "Pesan": pesanVal
-          }
-        ]
+        Nama: namaVal,
+        Pesan: pesanVal
       };
 
-      fetch(apiURL, {
+      // Mengirim data menggunakan metode CORS-safe untuk Google Apps Script
+      fetch(webAppUrl, {
         method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
         body: JSON.stringify(dataKirim)
       })
-      .then(response => response.json())
-      .then(data => {
+      .then(response => response.text())
+      .then(result => {
         alert('Terima kasih! Pesan berhasil dikirim dan tersimpan di database.');
         form.reset();
         btnKirim.innerText = "Kirim ke Database";
@@ -288,12 +272,13 @@
       })
       .catch(error => {
         console.error('Error!', error);
-        alert('Gagal mengirim pesan, silakan coba lagi.');
+        alert('Gagal mengirim pesan, silakan periksa koneksi.');
         btnKirim.innerText = "Kirim ke Database";
         btnKirim.disabled = false;
       });
     });
   </script>
+
 
    
   <!-- Tombol Kembali ke Beranda -->
