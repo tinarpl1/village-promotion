@@ -214,7 +214,7 @@
     </div>
   </section>
 
-<!-- FORMULIR BUKU TAMU SHEETDB -->
+<!-- FORMULIR BUKU TAMU -->
 <section class="py-8 px-4 md:px-8 bg-transparent">
   <div class="max-w-xl mx-auto bg-stone-50 dark:bg-gray-800 p-6 md:p-8 rounded-3xl border border-gray-200/70 dark:border-gray-700 shadow-md">
     <div class="text-center mb-6">
@@ -240,8 +240,8 @@
 </section>
 
 <script>
-  // Link API SheetDB lu
-  const apiURL = 'https://sheetdb.io/api/v1/H6gfps10dd6m6';
+  // Tempelkan URL Web App dari Google Apps Script kamu di bawah
+  const apiURL = 'https://script.google.com/macros/s/AKfycbxWVbAmeKGx8XTO240fKjTOtL8GHPc9gI0tjJnpqr9l8uDz2zV0zpeq10diJz9rwblZ/exec'; 
   const form = document.getElementById('formDatabase');
   const btnKirim = document.getElementById('btnKirim');
 
@@ -250,47 +250,35 @@
     btnKirim.innerText = "Mengirim...";
     btnKirim.disabled = true;
 
-    // Ambil waktu lokal otomatis
-    const sekarang = new Date();
-    const waktuLokal = sekarang.toLocaleString('id-ID', {
-      dateStyle: 'medium',
-      timeStyle: 'medium'
-    });
-
-    // Format JSON khusus untuk SheetDB
-    const dataKirim = {
-      data: [
-        {
-          "Timestamp": waktuLokal,
-          "Nama": document.getElementById('inputNama').value,
-          "Pesan": document.getElementById('inputPesan').value
-        }
-      ]
-    };
+    const namaInput = document.getElementById('inputNama').value;
+    const pesanInput = document.getElementById('inputPesan').value;
 
     fetch(apiURL, {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'text/plain;charset=utf-8'
       },
-      body: JSON.stringify(dataKirim)
+      body: JSON.stringify({
+        nama: namaInput,
+        pesan: pesanInput
+      })
     })
     .then(response => response.json())
     .then(data => {
       alert('Terima kasih! Pesan berhasil dikirim dan tersimpan di database.');
       form.reset();
-      btnKirim.innerText = "Kirim ke Database";
-      btnKirim.disabled = false;
     })
     .catch(error => {
       console.error('Error!', error);
       alert('Gagal mengirim pesan, silakan coba lagi.');
+    })
+    .finally(() => {
       btnKirim.innerText = "Kirim ke Database";
       btnKirim.disabled = false;
     });
   });
 </script>
+
   
   <!-- Tombol Kembali ke Beranda -->
   <div class="max-w-5xl mx-auto px-4 pb-16 pt-6">
