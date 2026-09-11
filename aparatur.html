@@ -228,6 +228,12 @@
         <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Nama Lengkap</label>
         <input type="text" id="inputNama" required placeholder="Masukkan nama Anda..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500">
       </div>
+      
+      <div>
+    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Email</label>
+    <input type="email" id="inputEmail" required placeholder="Masukkan email Anda..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500">
+      </div>
+        
       <div>
         <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Pesan / Masukan</label>
         <textarea id="inputPesan" rows="3" required placeholder="Tuliskan pesan atau masukan untuk desa..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500"></textarea>
@@ -259,6 +265,7 @@
     btnKirim.disabled = true;
 
     const namaInput = document.getElementById('inputNama').value;
+    const emailInput = document.getElementById('inputEmail').value;
     const pesanInput = document.getElementById('inputPesan').value;
 
     fetch(apiURL, {
@@ -268,6 +275,7 @@
       },
       body: JSON.stringify({
         nama: namaInput,
+        email: emailInput,
         pesan: pesanInput
       })
     })
