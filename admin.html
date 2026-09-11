@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin - Desa Mensere</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style> body { font-family: 'Plus Jakarta Sans', sans-serif; } </style>
+</head>
+<body class="bg-slate-100 min-h-screen flex items-center justify-center p-4">
+
+  <!-- 1. TAMPILAN LOGIN ADMIN -->
+  <div id="boxLogin" class="bg-white p-8 rounded-3xl shadow-xl w-full max-w-md text-center border border-gray-100">
+    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-3">
+      <i class="fa-solid fa-lock text-xl"></i>
+    </div>
+    <h2 class="text-xl font-bold text-gray-800">Login Admin Desa</h2>
+    <p class="text-xs text-gray-500 mb-6 mt-1">Masukan kata sandi untuk mengakses database pesan.</p>
+    
+    <input type="password" id="inputPass" placeholder="Masukkan Password Admin" class="w-full p-3 text-xs border border-gray-300 rounded-2xl mb-4 focus:outline-none focus:border-emerald-500 text-center">
+    
+    <button onclick="loginAdmin()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-2xl text-xs transition duration-300 shadow-lg shadow-emerald-600/20">
+      Masuk Panel Admin
+    </button>
+  </div>
+
+  <!-- 2. TAMPILAN DASHBOARD DATA (Tersembunyi Awalnya) -->
+  <div id="boxData" class="hidden w-full max-w-4xl bg-white p-6 md:p-8 rounded-3xl shadow-xl border border-gray-100">
+    <div class="flex justify-between items-center mb-6">
+      <div>
+        <h2 class="text-lg md:text-xl font-extrabold text-gray-900">Dashboard Pesan & Aspirasi</h2>
+        <p class="text-xs text-gray-500">Data masuk dari masyarakat Desa Mensere.</p>
+      </div>
+      <button onclick="location.reload()" class="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-xl text-xs font-bold hover:bg-emerald-200 transition">
+        <i class="fa-solid fa-rotate-right mr-1"></i> Refresh Data
+      </button>
+    </div>
+
+    <!-- Tabel Data -->
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs border-collapse">
+        <thead>
+          <tr class="bg-slate-50 border-b border-gray-200 text-gray-600 uppercase tracking-wider">
+            <th class="p-3">Waktu</th>
+            <th class="p-3">Nama</th>
+            <th class="p-3">Pesan / Masukan</th>
+          </tr>
+        </thead>
+        <tbody id="tabelBody" class="divide-y divide-gray-100">
+          <tr>
+            <td colspan="3" class="p-4 text-center text-gray-400">Memuat data dari database...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // URL Apps Script Kamu
+    const apiURL = 'https://script.google.com/macros/s/AKfycbxWVbAmeKGx8XTO240fKjTOtL8GHPc9gI0tjJnpqr9l8uDz2zV0zpeq10diJz9rwblZ/exec'; 
+    
+    // Set Password Admin Bebas Di Sini (Contoh: admin123)
+    const PASSWORD_BENAR = 'admin123';
+
+    function loginAdmin() {
+      const pass = document.getElementById('inputPass').value;
+      if (pass === PASSWORD_BENAR) {
+        document.getElementById('boxLogin').classList.add('hidden');
+        document.getElementById('boxData').classList.remove('hidden');
+        muatDataDatabase();
+      } else {
+        alert('Password Salah! Akses ditolak.');
+      }
+    }
+
+    function muatDataDatabase() {
+      fetch(apiURL)
+        .then(res => res.json())
+        .then(data => {
+          const tbody = document.getElementById('tabelBody');
+          tbody.innerHTML = ''; // Bersihkan isi awal
+
+          // Jika tidak ada data atau cuma ada header
+          if (data.length <= 1) {
+            tbody.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-gray-400">Belum ada pesan masuk.</td></tr>`;
+            return;
+          }
+
+          // Loop data (melewati baris header pertama)
+          for (let i = 1; i < data.length; i++) {
+            const baris = data[i];
+            const waktu = new Date(baris[0]).toLocaleString('id-ID');
+            const nama = baris[1] || '-';
+            const pesan = baris[2] || '-';
+
+            const tr = document.createElement('tr');
+            tr.className = "hover:bg-slate-50 transition";
+            tr.innerHTML = `
+              <td class="p-3 text-gray-500 whitespace-nowrap">${waktu}</td>
+              <td class="p-3 font-bold text-gray-800 whitespace-nowrap">${nama}</td>
+              <td class="p-3 text-gray-600">${pesan}</td>
+            `;
+            tbody.appendChild(tr);
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          alert('Gagal mengambil data dari Google Sheets.');
+        });
+    }
+  </script>
+</body>
+</html>
