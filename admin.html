@@ -45,6 +45,7 @@
           <tr class="bg-slate-50 border-b border-gray-200 text-gray-600 uppercase tracking-wider">
             <th class="p-3">Waktu</th>
             <th class="p-3">Nama</th>
+            <th class="p-3">Email</th> 
             <th class="p-3">Pesan / Masukan</th>
           </tr>
         </thead>
@@ -93,13 +94,15 @@
             const baris = data[i];
             const waktu = new Date(baris[0]).toLocaleString('id-ID');
             const nama = baris[1] || '-';
-            const pesan = baris[2] || '-';
+            const email = baris[2] || '-';
+            const pesan = baris[3] || '-';
 
             const tr = document.createElement('tr');
             tr.className = "hover:bg-slate-50 transition";
             tr.innerHTML = `
               <td class="p-3 text-gray-500 whitespace-nowrap">${waktu}</td>
               <td class="p-3 font-bold text-gray-800 whitespace-nowrap">${nama}</td>
+              <td class="p-3 text-emerald-600 whitespace-nowrap">${email}</td>
               <td class="p-3 text-gray-600">${pesan}</td>
             `;
             tbody.appendChild(tr);
