@@ -107,43 +107,49 @@
             </div>
           </div>
         
-          <!-- Statistik Penduduk Lengkap dengan Efek Zoom -->
-          <div class="space-y-3 my-6">
-            <!-- Baris 1: Total Penduduk & Luas Wilayah -->
-            <div class="grid grid-cols-2 gap-3">
-              <div class="bg-stone-50 dark:bg-gray-800 p-3.5 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700 hover:scale-105 transition duration-300 shadow-sm">
-                <h4 class="font-extrabold text-lg md:text-xl text-emerald-600">4.334</h4>
-                <p class="text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider mt-0.5">Total Penduduk</p>
-              </div>
-              <div class="bg-stone-50 dark:bg-gray-800 p-3.5 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700 hover:scale-105 transition duration-300 shadow-sm">
-                <h4 class="font-extrabold text-lg md:text-xl text-emerald-600">4,50 km²</h4>
-                <p class="text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider mt-0.5">Luas Wilayah</p>
-              </div>
-            </div>
+          <!-- Statistik Penduduk Lengkap (Responsive Desktop & Mobile) -->
+<div class="my-6">
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
+    
+    <!-- Total Penduduk -->
+    <div class="bg-stone-50 dark:bg-gray-800 p-4 md:p-5 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700 hover:scale-105 hover:border-emerald-500 transition duration-300 shadow-sm flex flex-col justify-center">
+      <h4 class="font-extrabold text-xl md:text-2xl text-emerald-600 dark:text-emerald-400">4.334</h4>
+      <p class="text-[10px] md:text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider mt-1">Total Penduduk</p>
+    </div>
 
-            <!-- Baris 2: Rincian Laki-laki, Perempuan, & Kode Pos -->
-            <div class="grid grid-cols-3 gap-3">
-              <div class="bg-stone-50 dark:bg-gray-800 p-3 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700 hover:scale-105 transition duration-300 shadow-sm">
-                <div class="flex items-center justify-center gap-1 text-emerald-600 mb-0.5">
-                  <i class="fa-solid fa-mars text-xs"></i>
-                  <h4 class="font-extrabold text-sm md:text-base">2.210</h4>
-                </div>
-                <p class="text-[9px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wide">Laki-laki</p>
-              </div>
-              <div class="bg-stone-50 dark:bg-gray-800 p-3 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700 hover:scale-105 transition duration-300 shadow-sm">
-                <div class="flex items-center justify-center gap-1 text-emerald-600 mb-0.5">
-                  <i class="fa-solid fa-venus text-xs"></i>
-                  <h4 class="font-extrabold text-sm md:text-base">2.124</h4>
-                </div>
-                <p class="text-[9px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wide">Perempuan</p>
-              </div>
-              <div class="bg-stone-50 dark:bg-gray-800 p-3 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700 hover:scale-105 transition duration-300 shadow-sm">
-                <h4 class="font-extrabold text-sm md:text-base text-emerald-600 mb-0.5">79461</h4>
-                <p class="text-[9px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wide">Kode Pos</p>
-              </div>
-            </div>
-          </div>
-        </div>
+    <!-- Luas Wilayah -->
+    <div class="bg-stone-50 dark:bg-gray-800 p-4 md:p-5 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700 hover:scale-105 hover:border-emerald-500 transition duration-300 shadow-sm flex flex-col justify-center">
+      <h4 class="font-extrabold text-xl md:text-2xl text-emerald-600 dark:text-emerald-400">4,50 km²</h4>
+      <p class="text-[10px] md:text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider mt-1">Luas Wilayah</p>
+    </div>
+
+    <!-- Laki-laki -->
+    <div class="bg-stone-50 dark:bg-gray-800 p-4 md:p-5 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700 hover:scale-105 hover:border-emerald-500 transition duration-300 shadow-sm flex flex-col justify-center">
+      <div class="flex items-center justify-center gap-1.5 text-emerald-600 dark:text-emerald-400 mb-0.5">
+        <i class="fa-solid fa-mars text-sm"></i>
+        <h4 class="font-extrabold text-xl md:text-2xl">2.210</h4>
+      </div>
+      <p class="text-[10px] md:text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider">Laki-laki</p>
+    </div>
+
+    <!-- Perempuan -->
+    <div class="bg-stone-50 dark:bg-gray-800 p-4 md:p-5 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700 hover:scale-105 hover:border-emerald-500 transition duration-300 shadow-sm flex flex-col justify-center">
+      <div class="flex items-center justify-center gap-1.5 text-emerald-600 dark:text-emerald-400 mb-0.5">
+        <i class="fa-solid fa-venus text-sm"></i>
+        <h4 class="font-extrabold text-xl md:text-2xl">2.124</h4>
+      </div>
+      <p class="text-[10px] md:text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider">Perempuan</p>
+    </div>
+
+    <!-- Kode Pos (Mengambil 2 kolom di HP agar genap) -->
+    <div class="col-span-2 sm:col-span-1 bg-stone-50 dark:bg-gray-800 p-4 md:p-5 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700 hover:scale-105 hover:border-emerald-500 transition duration-300 shadow-sm flex flex-col justify-center">
+      <h4 class="font-extrabold text-xl md:text-2xl text-emerald-600 dark:text-emerald-400">79461</h4>
+      <p class="text-[10px] md:text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider mt-1">Kode Pos</p>
+    </div>
+
+  </div>
+</div>
+
         
         <!-- Gambar dengan Animasi Melayang (Floating) -->
         <div class="lg:col-span-5 animate-float">
@@ -158,7 +164,7 @@
         <div class="text-center max-w-md mx-auto mb-10">
           <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-3 py-1 rounded-md border border-emerald-200/50 dark:border-emerald-800 shadow-sm">Administrasi Wilayah</span>
           <h3 class="text-xl md:text-2xl font-extrabold text-gray-900 dark:text-white mt-3">Pembagian Wilayah Dusun & Ke-RT-an</h3>
-          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 font-medium">Total membawahi 3 Dusun, 8 RW, dan 18 RT</p>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 font-medium">Dalam mendukung efektivitas tata kelola pemerintahan dan pelayanan publik, Desa Mensere terbagi atas 3 wilayah dusun, 8 RW, serta 18 RT.</p>
         </div>
         
         <div class="space-y-4 max-w-2xl mx-auto">
