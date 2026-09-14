@@ -79,30 +79,39 @@
     </div>
   </nav>
 
-  <!-- 1. Bagian Utama / Hero Beranda dengan Animasi Masuk -->
-  <section class="relative min-h-[85vh] flex items-center justify-center text-center bg-emerald-50/60 dark:bg-gray-900 px-4 pt-28 pb-12">
-    <div class="max-w-2xl relative z-10 animate-fade-in">
-      <span class="inline-flex items-center gap-1.5 bg-emerald-100 dark:bg-emerald-950 px-4 py-1.5 rounded-full text-[11px] font-extrabold text-emerald-800 dark:text-emerald-300 mb-5 border border-emerald-200 dark:border-emerald-800 shadow-sm animate-float">
-        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-        📍 Kec. Tebas, Kab. Sambas, Kalimantan Barat
-      </span>
-      
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight text-gray-900 dark:text-white">
-        Selamat Datang di <span class="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">Desa Mensere</span>
-      </h1>
-      
-      <p class="text-gray-600 dark:text-gray-400 text-xs md:text-sm mb-8 max-w-lg mx-auto leading-relaxed font-medium">
-        Menyajikan keasrian alam, potensi pertanian & perkebunan lokal, serta semangat gotong royong warga Desa Mensere yang harmonis dan mandiri.
-      </p>
-      
-      <div class="flex justify-center gap-3">
-        <a href="tentang.html" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-6 py-3 rounded-2xl transition-all duration-300 shadow-lg shadow-emerald-600/20 hover:scale-105 text-xs flex items-center gap-2 group">
-          <span>Jelajahi Desa</span>
-          <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1.5 transition-transform duration-300"></i>
-        </a>
-      </div>
+  <!-- 1. Bagian Utama / Hero Beranda -->
+<section class="relative min-h-[85vh] flex items-center justify-center text-center px-4 pt-28 pb-12 overflow-hidden">
+  
+  <!-- Gambar Background (Warna Alami) -->
+  <img src="sawah.jpg" alt="Sawah Desa Mensere" class="absolute inset-0 w-full h-full object-cover object-center z-0">
+
+  <!-- Lapisan Overlay Transparan Tipis (Biar Warna Sawah Tetap Hijau Tajam & Teks Jelas) -->
+  <div class="absolute inset-0 bg-gradient-to-b from-white/40 via-white/20 to-stone-50 dark:from-gray-950/70 dark:via-gray-950/50 dark:to-gray-950 z-0"></div>
+
+  <!-- Konten Teks & Tombol -->
+  <div class="max-w-2xl relative z-10 animate-fade-in">
+    <span class="inline-flex items-center gap-1.5 bg-emerald-100/90 dark:bg-emerald-950/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-[11px] font-extrabold text-emerald-900 dark:text-emerald-300 mb-5 border border-emerald-300 dark:border-emerald-800 shadow-sm animate-float">
+      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+      📍 Kec. Tebas, Kab. Sambas, Kalimantan Barat
+    </span>
+    
+    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight text-gray-900 dark:text-white drop-shadow-sm">
+      Selamat Datang di <span class="bg-gradient-to-r from-emerald-700 to-teal-600 dark:from-emerald-400 dark:to-teal-300 bg-clip-text text-transparent">Desa Mensere</span>
+    </h1>
+    
+    <p class="text-gray-900 dark:text-gray-200 text-xs md:text-sm mb-8 max-w-lg mx-auto leading-relaxed font-bold drop-shadow-sm">
+      Menyajikan keasrian alam, potensi pertanian & perkebunan lokal, serta semangat gotong royong warga Desa Mensere yang harmonis dan mandiri.
+    </p>
+    
+    <div class="flex justify-center gap-3">
+      <a href="tentang.html" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-6 py-3 rounded-2xl transition-all duration-300 shadow-lg shadow-emerald-900/30 hover:scale-105 text-xs flex items-center gap-2 group">
+        <span>Jelajahi Desa</span>
+        <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1.5 transition-transform duration-300"></i>
+      </a>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- 2. Ringkasan / Preview Potensi Desa (Dengan Efek Hover Card) -->
   <section class="py-16 px-4 md:px-8 bg-stone-50/50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
