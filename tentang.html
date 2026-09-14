@@ -7,8 +7,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config = { darkMode: 'class' }</script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Google Font: Plus Jakarta Sans (Biar gak ngebosenin & modern) -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
@@ -16,77 +14,69 @@
     .no-scrollbar::-webkit-scrollbar { display: none; } 
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Animasi Keyframes Kustom Biar Hidup */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes floatSlow {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-6px); }
     }
-
-    .animate-fade-in {
-      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .animate-float {
-      animation: floatSlow 4s ease-in-out infinite;
-    }
+    .animate-fade-in { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .animate-float { animation: floatSlow 4s ease-in-out infinite; }
   </style>
 </head>
 <body class="bg-stone-50/50 dark:bg-gray-950 text-gray-800 dark:text-gray-100 font-sans antialiased transition-colors duration-300">
   
-  <!-- Floating Dark Mode dengan Animasi Putar -->
+  <!-- Dark Mode Button -->
   <div class="fixed bottom-5 right-5 z-50">
-    <button onclick="document.documentElement.classList.toggle('dark')" class="p-3.5 bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 text-white rounded-full shadow-2xl hover:scale-125 hover:rotate-45 transition duration-500 flex items-center justify-center">
+    <button onclick="document.documentElement.classList.toggle('dark')" class="p-3.5 bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 text-white rounded-full shadow-2xl hover:scale-125 transition duration-500 flex items-center justify-center">
       <i class="fa-solid fa-moon text-base dark:hidden"></i>
       <i class="fa-solid fa-sun text-base hidden dark:block"></i>
     </button>
   </div>
 
-  <!-- Navbar Lengkap (Desktop & Mobile) -->
+  <!-- Navbar -->
   <nav class="fixed top-3 left-1/2 -translate-x-1/2 w-[92%] max-w-5xl z-50 bg-white/85 dark:bg-gray-900/85 backdrop-blur-md text-gray-800 dark:text-white px-4 md:px-6 py-2.5 shadow-lg shadow-emerald-900/5 border border-gray-200/60 dark:border-gray-800 rounded-full transition-all">
     <div class="max-w-5xl mx-auto flex justify-between items-center">
       <a href="index.html" class="text-base md:text-lg font-extrabold tracking-tight flex items-center gap-1.5 group">
-        <i class="fa-solid fa-tree text-emerald-600 group-hover:rotate-45 group-hover:scale-125 transition-transform duration-500"></i> Desa Mensere.
+        <i class="fa-solid fa-tree text-emerald-600 group-hover:rotate-45 transition-transform duration-500"></i> Desa Mensere.
       </a>
       
-      <!-- Menu Desktop -->
       <ul class="hidden md:flex space-x-5 text-xs font-semibold text-gray-600 dark:text-gray-300">
-        <li><a href="index.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition hover:scale-105 inline-block">Beranda</a></li>
-        <li><a href="tentang.html" class="text-emerald-600 dark:text-emerald-400 font-bold scale-105 inline-block">Tentang</a></li>
-        <li><a href="potensi.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition hover:scale-105 inline-block">Potensi</a></li>
-        <li><a href="pendidikan.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition hover:scale-105 inline-block">Pendidikan</a></li>
-        <li><a href="fasilitas.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition hover:scale-105 inline-block">Fasilitas</a></li>
-        <li><a href="aparatur.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition hover:scale-105 inline-block">Aparatur & Kontak</a></li>
+        <li><a href="index.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Beranda</a></li>
+        <li><a href="tentang.html" class="text-emerald-600 dark:text-emerald-400 font-bold">Tentang</a></li>
+        <li><a href="potensi.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Potensi</a></li>
+        <li><a href="pendidikan.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Pendidikan</a></li>
+        <li><a href="fasilitas.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Fasilitas</a></li>
+        <li><a href="aparatur.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Aparatur & Kontak</a></li>
       </ul>
 
-      <a href="aparatur.html#lokasi" class="bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 text-white px-3.5 py-1.5 rounded-full text-[11px] font-bold shadow-md hover:shadow-emerald-500/30 hover:scale-105 transition-all duration-300 flex items-center gap-1.5 shrink-0">
+      <a href="aparatur.html#lokasi" class="bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 text-white px-3.5 py-1.5 rounded-full text-[11px] font-bold shadow-md hover:scale-105 transition-all duration-300 flex items-center gap-1.5 shrink-0">
         <span>Hubungi Kami</span> <i class="fa-solid fa-phone text-[9px]"></i>
       </a>
     </div>
 
-    <!-- Menu Mobile Scrollable -->
+    <!-- Mobile Scroll Menu -->
     <div class="md:hidden flex space-x-4 text-[11px] font-semibold overflow-x-auto whitespace-nowrap pt-2 pb-0.5 mt-1 border-t border-gray-100 dark:border-gray-800 no-scrollbar text-gray-600 dark:text-gray-300">
-      <a href="index.html" class="hover:text-emerald-600 transition">Beranda</a>
+      <a href="index.html" class="hover:text-emerald-600">Beranda</a>
       <a href="tentang.html" class="text-emerald-600 font-bold">Tentang</a>
-      <a href="potensi.html" class="hover:text-emerald-600 transition">Potensi</a>
-      <a href="pendidikan.html" class="hover:text-emerald-600 transition">Pendidikan</a>
-      <a href="fasilitas.html" class="hover:text-emerald-600 transition">Fasilitas</a>
-      <a href="aparatur.html" class="hover:text-emerald-600 transition">Aparatur & Kontak</a>
+      <a href="potensi.html" class="hover:text-emerald-600">Potensi</a>
+      <a href="pendidikan.html" class="hover:text-emerald-600">Pendidikan</a>
+      <a href="fasilitas.html" class="hover:text-emerald-600">Fasilitas</a>
+      <a href="aparatur.html" class="hover:text-emerald-600">Aparatur & Kontak</a>
     </div>
   </nav>
 
-  <!-- Konten Tentang dengan Animasi Masuk -->
+  <!-- Section Utama -->
   <section class="py-28 px-4 md:px-8 bg-white dark:bg-gray-900 min-h-screen">
-    <div class="max-w-5xl mx-auto animate-fade-in">
+    <div class="max-w-5xl mx-auto animate-fade-in space-y-16">
+      
+      <!-- Grid Profil & Gambar -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <div class="lg:col-span-7">
           <span class="text-[11px] font-extrabold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-3 py-1 rounded-md border border-emerald-200/50 dark:border-emerald-800 shadow-sm inline-block">Profil Desa</span>
           
-          <!-- Judul dengan Gradasi Warna Biar Lucu & Hidup -->
           <h2 class="text-2xl md:text-4xl font-extrabold mt-3 text-gray-900 dark:text-white leading-tight">
             Mengenal Lebih Dekat <span class="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">Desa Mensere</span>
           </h2>
@@ -95,84 +85,77 @@
             Desa Mensere terletak di wilayah Kecamatan Tebas, Kabupaten Sambas. Desa ini kaya akan potensi pertanian, sektor perkebunan rakyat yang produktif, serta kearifan budaya Melayu Sambas yang terus dijaga oleh masyarakat setempat.
           </p>
 
-          <!-- Kotak Visi Misi dengan Efek Hover Menyala -->
+          <!-- Visi & Misi -->
           <div class="space-y-3 mb-6">
-            <div class="flex items-start gap-3 p-3.5 bg-stone-50 dark:bg-gray-800/60 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-emerald-500 dark:hover:border-emerald-500 hover:shadow-md transition-all duration-300">
-              <i class="fa-solid fa-circle-check text-emerald-600 dark:text-emerald-400 text-sm mt-0.5 animate-bounce"></i>
+            <div class="flex items-start gap-3 p-3.5 bg-stone-50 dark:bg-gray-800/60 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-emerald-500 transition-all duration-300">
+              <i class="fa-solid fa-circle-check text-emerald-600 dark:text-emerald-400 text-sm mt-0.5"></i>
               <p class="text-xs text-gray-700 dark:text-gray-300 font-medium"><span class="font-bold text-gray-900 dark:text-white">Visi:</span> Terwujudnya Desa Mensere yang Sejahtera, Maju, dan Berbudaya.</p>
             </div>
-            <div class="flex items-start gap-3 p-3.5 bg-stone-50 dark:bg-gray-800/60 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-emerald-500 dark:hover:border-emerald-500 hover:shadow-md transition-all duration-300">
-              <i class="fa-solid fa-circle-check text-emerald-600 dark:text-emerald-400 text-sm mt-0.5 animate-bounce"></i>
+            <div class="flex items-start gap-3 p-3.5 bg-stone-50 dark:bg-gray-800/60 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-emerald-500 transition-all duration-300">
+              <i class="fa-solid fa-circle-check text-emerald-600 dark:text-emerald-400 text-sm mt-0.5"></i>
               <p class="text-xs text-gray-700 dark:text-gray-300 font-medium"><span class="font-bold text-gray-900 dark:text-white">Misi:</span> Meningkatkan tata kelola pemerintahan desa yang transparan dan pelayanan publik yang prima.</p>
             </div>
           </div>
         
-          <!-- Statistik Penduduk Lengkap (Responsive Desktop & Mobile) -->
-<div class="my-6">
-  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
-    
-    <!-- Total Penduduk -->
-    <div class="bg-stone-50 dark:bg-gray-800 p-4 md:p-5 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700 hover:scale-105 hover:border-emerald-500 transition duration-300 shadow-sm flex flex-col justify-center">
-      <h4 class="font-extrabold text-xl md:text-2xl text-emerald-600 dark:text-emerald-400">4.334</h4>
-      <p class="text-[10px] md:text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider mt-1">Total Penduduk</p>
-    </div>
+          <!-- Statistik Penduduk -->
+          <div class="my-6">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+              <div class="bg-stone-50 dark:bg-gray-800 p-4 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700">
+                <h4 class="font-extrabold text-xl text-emerald-600 dark:text-emerald-400">4.334</h4>
+                <p class="text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase mt-1">Total Penduduk</p>
+              </div>
 
-    <!-- Luas Wilayah -->
-    <div class="bg-stone-50 dark:bg-gray-800 p-4 md:p-5 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700 hover:scale-105 hover:border-emerald-500 transition duration-300 shadow-sm flex flex-col justify-center">
-      <h4 class="font-extrabold text-xl md:text-2xl text-emerald-600 dark:text-emerald-400">4,50 km²</h4>
-      <p class="text-[10px] md:text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider mt-1">Luas Wilayah</p>
-    </div>
+              <div class="bg-stone-50 dark:bg-gray-800 p-4 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700">
+                <h4 class="font-extrabold text-xl text-emerald-600 dark:text-emerald-400">4,50 km²</h4>
+                <p class="text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase mt-1">Luas Wilayah</p>
+              </div>
 
-    <!-- Laki-laki -->
-    <div class="bg-stone-50 dark:bg-gray-800 p-4 md:p-5 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700 hover:scale-105 hover:border-emerald-500 transition duration-300 shadow-sm flex flex-col justify-center">
-      <div class="flex items-center justify-center gap-1.5 text-emerald-600 dark:text-emerald-400 mb-0.5">
-        <i class="fa-solid fa-mars text-sm"></i>
-        <h4 class="font-extrabold text-xl md:text-2xl">2.210</h4>
-      </div>
-      <p class="text-[10px] md:text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider">Laki-laki</p>
-    </div>
+              <div class="bg-stone-50 dark:bg-gray-800 p-4 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700">
+                <div class="flex items-center justify-center gap-1 text-emerald-600 dark:text-emerald-400">
+                  <i class="fa-solid fa-mars text-xs"></i>
+                  <h4 class="font-extrabold text-xl">2.210</h4>
+                </div>
+                <p class="text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase mt-1">Laki-laki</p>
+              </div>
 
-    <!-- Perempuan -->
-    <div class="bg-stone-50 dark:bg-gray-800 p-4 md:p-5 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700 hover:scale-105 hover:border-emerald-500 transition duration-300 shadow-sm flex flex-col justify-center">
-      <div class="flex items-center justify-center gap-1.5 text-emerald-600 dark:text-emerald-400 mb-0.5">
-        <i class="fa-solid fa-venus text-sm"></i>
-        <h4 class="font-extrabold text-xl md:text-2xl">2.124</h4>
-      </div>
-      <p class="text-[10px] md:text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider">Perempuan</p>
-    </div>
+              <div class="bg-stone-50 dark:bg-gray-800 p-4 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700">
+                <div class="flex items-center justify-center gap-1 text-emerald-600 dark:text-emerald-400">
+                  <i class="fa-solid fa-venus text-xs"></i>
+                  <h4 class="font-extrabold text-xl">2.124</h4>
+                </div>
+                <p class="text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase mt-1">Perempuan</p>
+              </div>
 
-    <!-- Kode Pos (Mengambil 2 kolom di HP agar genap) -->
-    <div class="col-span-2 sm:col-span-1 bg-stone-50 dark:bg-gray-800 p-4 md:p-5 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700 hover:scale-105 hover:border-emerald-500 transition duration-300 shadow-sm flex flex-col justify-center">
-      <h4 class="font-extrabold text-xl md:text-2xl text-emerald-600 dark:text-emerald-400">79461</h4>
-      <p class="text-[10px] md:text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider mt-1">Kode Pos</p>
-    </div>
+              <div class="col-span-2 sm:col-span-1 bg-stone-50 dark:bg-gray-800 p-4 rounded-2xl text-center border border-gray-200/60 dark:border-gray-700">
+                <h4 class="font-extrabold text-xl text-emerald-600 dark:text-emerald-400">79461</h4>
+                <p class="text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase mt-1">Kode Pos</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-  </div>
-</div>
-
-        
-        <!-- Gambar dengan Animasi Melayang (Floating) -->
-        <div class="lg:col-span-5 animate-float">
+        <!-- Gambar -->
+        <div class="lg:col-span-5 animate-float w-full">
           <div class="overflow-hidden rounded-3xl shadow-2xl border-4 border-white dark:border-gray-800 group">
-            <img class="w-full h-[340px] object-cover group-hover:scale-110 transition duration-700" src="jalan.jpg" alt="Suasana Desa Mensere">
+            <img class="w-full h-72 lg:h-[340px] object-cover group-hover:scale-110 transition duration-700" src="jalan.jpg" alt="Suasana Desa Mensere">
           </div>
         </div>
       </div>
 
-      <!-- Wilayah Dusun dengan Efek Geser & Hover -->
-      <div class="mt-20">
-        <div class="text-center max-w-md mx-auto mb-10">
+      <!-- Section Wilayah Dusun -->
+      <div class="w-full pt-8 border-t border-gray-100 dark:border-gray-800">
+        <div class="text-center max-w-xl mx-auto mb-10">
           <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-3 py-1 rounded-md border border-emerald-200/50 dark:border-emerald-800 shadow-sm">Administrasi Wilayah</span>
           <h3 class="text-xl md:text-2xl font-extrabold text-gray-900 dark:text-white mt-3">Pembagian Wilayah Dusun & Ke-RT-an</h3>
-          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 font-medium">Dalam mendukung efektivitas tata kelola pemerintahan dan pelayanan publik, Desa Mensere terbagi atas 3 wilayah dusun, 8 RW, serta 18 RT.</p>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 font-medium leading-relaxed">Dalam mendukung efektivitas tata kelola pemerintahan dan pelayanan publik, Desa Mensere terbagi atas 3 wilayah dusun, 8 RW, serta 18 RT.</p>
         </div>
         
         <div class="space-y-4 max-w-2xl mx-auto">
           <!-- Dusun 1 -->
-          <div class="bg-stone-50 dark:bg-gray-800/90 p-5 rounded-3xl border border-gray-200/60 dark:border-gray-700 hover:border-emerald-500 dark:hover:border-emerald-500 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col gap-3">
+          <div class="bg-stone-50 dark:bg-gray-800/90 p-5 rounded-3xl border border-gray-200/60 dark:border-gray-700 hover:border-emerald-500 transition-all duration-300 flex flex-col gap-3">
             <div class="flex justify-between items-center">
               <div class="flex items-center gap-3.5">
-                <span class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-600 font-extrabold text-xs flex items-center justify-center shadow-inner">01</span>
+                <span class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-600 font-extrabold text-xs flex items-center justify-center shadow-inner shrink-0">01</span>
                 <h4 class="font-extrabold text-sm md:text-base text-gray-900 dark:text-white">Dusun Bumi Asih</h4>
               </div>
               <div class="flex gap-2">
@@ -184,10 +167,10 @@
           </div>
           
           <!-- Dusun 2 -->
-          <div class="bg-stone-50 dark:bg-gray-800/90 p-5 rounded-3xl border border-gray-200/60 dark:border-gray-700 hover:border-emerald-500 dark:hover:border-emerald-500 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col gap-3">
+          <div class="bg-stone-50 dark:bg-gray-800/90 p-5 rounded-3xl border border-gray-200/60 dark:border-gray-700 hover:border-emerald-500 transition-all duration-300 flex flex-col gap-3">
             <div class="flex justify-between items-center">
               <div class="flex items-center gap-3.5">
-                <span class="w-10 h-10 rounded-2xl bg-emerald-700 text-white font-extrabold text-xs flex items-center justify-center shadow-md">02</span>
+                <span class="w-10 h-10 rounded-2xl bg-emerald-700 text-white font-extrabold text-xs flex items-center justify-center shadow-md shrink-0">02</span>
                 <h4 class="font-extrabold text-sm md:text-base text-gray-900 dark:text-white">Dusun Lestari</h4>
               </div>
               <div class="flex gap-2">
@@ -199,10 +182,10 @@
           </div>
 
           <!-- Dusun 3 -->
-          <div class="bg-stone-50 dark:bg-gray-800/90 p-5 rounded-3xl border border-gray-200/60 dark:border-gray-700 hover:border-emerald-500 dark:hover:border-emerald-500 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col gap-3">
+          <div class="bg-stone-50 dark:bg-gray-800/90 p-5 rounded-3xl border border-gray-200/60 dark:border-gray-700 hover:border-emerald-500 transition-all duration-300 flex flex-col gap-3">
             <div class="flex justify-between items-center">
               <div class="flex items-center gap-3.5">
-                <span class="w-10 h-10 rounded-2xl bg-stone-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-extrabold text-xs flex items-center justify-center shadow-inner">03</span>
+                <span class="w-10 h-10 rounded-2xl bg-stone-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-extrabold text-xs flex items-center justify-center shadow-inner shrink-0">03</span>
                 <h4 class="font-extrabold text-sm md:text-base text-gray-900 dark:text-white">Dusun Mekar Mandiri</h4>
               </div>
               <div class="flex gap-2">
@@ -214,12 +197,13 @@
           </div>
         </div>
       </div>
+
     </div>
   </section>
   
-  <!-- Tombol Pindah ke Halaman Selanjutnya (Dengan Efek Hover Bergerak) -->
+  <!-- Navigation Bottom -->
   <div class="max-w-5xl mx-auto px-4 pb-16 pt-6">
-    <div class="flex items-center justify-between bg-stone-100 dark:bg-gray-800/80 p-5 rounded-3xl border border-gray-200 dark:border-gray-700 shadow-md hover:shadow-xl transition-all duration-300">
+    <div class="flex items-center justify-between bg-stone-100 dark:bg-gray-800/80 p-5 rounded-3xl border border-gray-200 dark:border-gray-700 shadow-md">
       <div>
         <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Navigasi Halaman</span>
         <h4 class="font-extrabold text-sm md:text-base text-gray-900 dark:text-white mt-0.5">Lanjut ke Potensi Desa</h4>
