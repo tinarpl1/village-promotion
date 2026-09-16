@@ -6,112 +6,181 @@
   <title>Panel Admin - Desa Mensere</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <style> body { font-family: 'Plus Jakarta Sans', sans-serif; } </style>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
 </head>
-<body class="bg-slate-100 min-h-screen flex items-center justify-center p-4">
+<body class="bg-gray-100 min-h-screen text-gray-800 antialiased">
 
-  <!-- 1. TAMPILAN LOGIN ADMIN -->
-  <div id="boxLogin" class="bg-white p-8 rounded-3xl shadow-xl w-full max-w-md text-center border border-gray-100">
-    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-3">
-      <i class="fa-solid fa-lock text-xl"></i>
+  <!-- Header Admin -->
+  <header class="bg-emerald-900 text-white py-4 px-6 shadow-md flex justify-between items-center">
+    <div class="flex items-center gap-2 font-bold text-lg">
+      <i class="fa-solid fa-user-shield text-emerald-400"></i>
+      <span>Admin Dashboard - Desa Mensere</span>
     </div>
-    <h2 class="text-xl font-bold text-gray-800">Login Admin Desa</h2>
-    <p class="text-xs text-gray-500 mb-6 mt-1">Masukan kata sandi untuk mengakses database pesan.</p>
-    
-    <input type="password" id="inputPass" placeholder="Masukkan Password Admin" class="w-full p-3 text-xs border border-gray-300 rounded-2xl mb-4 focus:outline-none focus:border-emerald-500 text-center">
-    
-    <button onclick="loginAdmin()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-2xl text-xs transition duration-300 shadow-lg shadow-emerald-600/20">
-      Masuk Panel Admin
-    </button>
-  </div>
+    <a href="aparatur.html" class="text-xs bg-emerald-800 hover:bg-emerald-700 px-3 py-1.5 rounded-xl font-semibold transition">
+      <i class="fa-solid fa-arrow-left"></i> Kembalikan Ke Web
+    </a>
+  </header>
 
-  <!-- 2. TAMPILAN DASHBOARD DATA (Tersembunyi Awalnya) -->
-  <div id="boxData" class="hidden w-full max-w-4xl bg-white p-6 md:p-8 rounded-3xl shadow-xl border border-gray-100">
-    <div class="flex justify-between items-center mb-6">
-      <div>
-        <h2 class="text-lg md:text-xl font-extrabold text-gray-900">Dashboard Pesan & Aspirasi</h2>
-        <p class="text-xs text-gray-500">Data masuk dari masyarakat Desa Mensere.</p>
+  <!-- Container Utama -->
+  <main class="max-w-4xl mx-auto p-4 md:p-6">
+
+    <!-- Form Login Password Admin -->
+    <div id="loginBox" class="bg-white p-8 rounded-3xl shadow-md border border-gray-200 max-w-md mx-auto mt-12 text-center">
+      <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-xl mb-3">
+        <i class="fa-solid fa-lock"></i>
       </div>
-      <button onclick="location.reload()" class="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-xl text-xs font-bold hover:bg-emerald-200 transition">
-        <i class="fa-solid fa-rotate-right mr-1"></i> Refresh Data
-      </button>
+      <h2 class="text-xl font-bold text-gray-900">Akses Panel Admin</h2>
+      <p class="text-xs text-gray-500 mt-1 mb-6">Masukkan kata sandi admin untuk melihat dan membalas aspirasi warga.</p>
+      
+      <div class="space-y-4">
+        <input type="password" id="inputPass" placeholder="Masukkan Password Admin" class="w-full p-3 text-xs rounded-2xl border border-gray-300 focus:outline-none focus:border-emerald-500 text-center font-bold">
+        <button onclick="loginAdmin()" id="btnLogin" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-2xl text-xs transition shadow-lg shadow-emerald-600/20">
+          Masuk Dashboard
+        </button>
+      </div>
     </div>
 
-    <!-- Tabel Data -->
-    <div class="overflow-x-auto">
-      <table class="w-full text-left text-xs border-collapse">
-        <thead>
-          <tr class="bg-slate-50 border-b border-gray-200 text-gray-600 uppercase tracking-wider">
-            <th class="p-3">Waktu</th>
-            <th class="p-3">Nama</th>
-            <th class="p-3">Email</th> 
-            <th class="p-3">Pesan / Masukan</th>
-          </tr>
-        </thead>
-        <tbody id="tabelBody" class="divide-y divide-gray-100">
-          <tr>
-            <td colspan="3" class="p-4 text-center text-gray-400">Memuat data dari database...</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Dashboard Pesan (Tersembunyi Sebelum Login) -->
+    <div id="dashboardBox" class="hidden space-y-6">
+      
+      <div class="flex justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-gray-200">
+        <div>
+          <h3 class="font-bold text-base text-gray-900">Daftar Aspirasi Warga</h3>
+          <p class="text-xs text-gray-500">Kelola dan tanggapi pesan yang dikirim oleh warga desa.</p>
+        </div>
+        <button onclick="loadPesan()" class="bg-emerald-100 text-emerald-700 hover:bg-emerald-200 px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+          <i class="fa-solid fa-rotate"></i> Refresh Data
+        </button>
+      </div>
+
+      <!-- Container Card Pesan -->
+      <div id="containerPesan" class="space-y-4">
+        <!-- Card akan digenerate otomatis via JS -->
+      </div>
+
     </div>
-  </div>
+
+  </main>
 
   <script>
-    // URL Apps Script Kamu
-    const apiURL = 'https://script.google.com/macros/s/AKfycbxWVbAmeKGx8XTO240fKjTOtL8GHPc9gI0tjJnpqr9l8uDz2zV0zpeq10diJz9rwblZ/exec'; 
-    
-    // Set Password Admin Bebas Di Sini (Contoh: admin123)
-    const PASSWORD_BENAR = 'admin123';
+    // URL Web App Google Apps Script Kamu
+    const apiURL = 'https://script.google.com/macros/s/AKfycbyM67pvzp7zu1VMx7M6dIIZvA1vgAogBzizWi_UfqHoafSBgXwW2wVUt5aJdZ_RLfeb/exec';
+ 
+    let currentPassword = '';
 
     function loginAdmin() {
       const pass = document.getElementById('inputPass').value;
-      if (pass === PASSWORD_BENAR) {
-        document.getElementById('boxLogin').classList.add('hidden');
-        document.getElementById('boxData').classList.remove('hidden');
-        muatDataDatabase();
-      } else {
-        alert('Password Salah! Akses ditolak.');
-      }
+      if (!pass) return alert('Masukkan password!');
+
+      const btn = document.getElementById('btnLogin');
+      btn.innerText = "Memeriksa...";
+      btn.disabled = true;
+
+      fetch(`${apiURL}?action=getSemuaPesan&password=${encodeURIComponent(pass)}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'unauthorized') {
+          alert('Password Admin Salah!');
+        } else if (data.status === 'success') {
+          currentPassword = pass;
+          document.getElementById('loginBox').classList.add('hidden');
+          document.getElementById('dashboardBox').classList.remove('hidden');
+          renderPesan(data.data);
+        }
+      })
+      .catch(err => alert('Gagal terhubung ke server.'))
+      .finally(() => {
+        btn.innerText = "Masuk Dashboard";
+        btn.disabled = false;
+      });
     }
 
-    function muatDataDatabase() {
-      fetch(apiURL)
-        .then(res => res.json())
-        .then(data => {
-          const tbody = document.getElementById('tabelBody');
-          tbody.innerHTML = ''; // Bersihkan isi awal
+    function loadPesan() {
+      fetch(`${apiURL}?action=getSemuaPesan&password=${encodeURIComponent(currentPassword)}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success') renderPesan(data.data);
+      });
+    }
 
-          // Jika tidak ada data atau cuma ada header
-          if (data.length <= 1) {
-            tbody.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-gray-400">Belum ada pesan masuk.</td></tr>`;
-            return;
-          }
+    function renderPesan(list) {
+      const container = document.getElementById('containerPesan');
+      container.innerHTML = '';
 
-          // Loop data (melewati baris header pertama)
-          for (let i = 1; i < data.length; i++) {
-            const baris = data[i];
-            const waktu = new Date(baris[0]).toLocaleString('id-ID');
-            const nama = baris[1] || '-';
-            const email = baris[2] || '-';
-            const pesan = baris[3] || '-';
+      if (list.length === 0) {
+        container.innerHTML = `<div class="bg-white p-8 text-center rounded-2xl text-xs text-gray-400">Belum ada pesan dari warga.</div>`;
+        return;
+      }
 
-            const tr = document.createElement('tr');
-            tr.className = "hover:bg-slate-50 transition";
-            tr.innerHTML = `
-              <td class="p-3 text-gray-500 whitespace-nowrap">${waktu}</td>
-              <td class="p-3 font-bold text-gray-800 whitespace-nowrap">${nama}</td>
-              <td class="p-3 text-emerald-600 whitespace-nowrap">${email}</td>
-              <td class="p-3 text-gray-600">${pesan}</td>
-            `;
-            tbody.appendChild(tr);
-          }
+      list.forEach((item, index) => {
+        const isDibalas = item.status === 'Sudah Dibalas' || item.balasan;
+        const badgeColor = isDibalas ? 'bg-blue-100 text-blue-700' : 'bg-amber-100 text-amber-700';
+        const statusText = isDibalas ? '✓✓ Sudah Dibalas' : '• Belum Dibalas';
+
+        const html = `
+          <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-200 space-y-3">
+            <div class="flex justify-between items-start">
+              <div>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-md ${badgeColor}">${statusText}</span>
+                <h4 class="font-bold text-sm text-gray-900 mt-1">${item.nama} <span class="text-xs font-normal text-gray-400">(${item.email})</span></h4>
+                <p class="text-[10px] text-gray-400">Token: <strong class="text-emerald-600 font-mono">${item.token}</strong> | ${item.tanggal}</p>
+              </div>
+            </div>
+
+            <!-- Isi Pesan Warga -->
+            <div class="bg-gray-50 p-3 rounded-xl text-xs text-gray-700 border border-gray-100">
+              <strong class="text-gray-900">Pesan:</strong> ${item.pesan}
+            </div>
+
+            <!-- Tanggapan Admin -->
+            ${isDibalas ? `
+              <div class="bg-emerald-50 p-3 rounded-xl text-xs text-emerald-900 border border-emerald-100">
+                <strong class="text-emerald-700"><i class="fa-solid fa-reply"></i> Balasan Admin:</strong> ${item.balasan}
+              </div>
+            ` : `
+              <!-- Form Balas jika Belum Dibalas -->
+              <div class="pt-2 space-y-2">
+                <textarea id="reply-${item.token}" rows="2" placeholder="Tuliskan balasan/tanggapan untuk warga..." class="w-full p-2.5 text-xs rounded-xl border border-gray-300 focus:outline-none focus:border-emerald-500"></textarea>
+                <button onclick="kirimBalasan('${item.token}')" id="btnReply-${item.token}" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1">
+                  <i class="fa-solid fa-paper-plane text-[10px]"></i> Kirim Balasan
+                </button>
+              </div>
+            `}
+          </div>
+        `;
+        container.innerHTML += html;
+      });
+    }
+
+    function kirimBalasan(token) {
+      const textarea = document.getElementById(`reply-${token}`);
+      const balasanText = textarea.value.trim();
+      if (!balasanText) return alert('Ketikkan balasan terlebih dahulu!');
+
+      const btn = document.getElementById(`btnReply-${token}`);
+      btn.innerText = "Mengirim...";
+      btn.disabled = true;
+
+      fetch(apiURL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          action: 'balasPesan',
+          token: token,
+          balasan: balasanText
         })
-        .catch(err => {
-          console.error(err);
-          alert('Gagal mengambil data dari Google Sheets.');
-        });
+      })
+      .then(res => res.json())
+      .then(res => {
+        alert('Balasan berhasil dikirim! Email telah diteruskan ke warga.');
+        loadPesan();
+      })
+      .catch(err => alert('Gagal mengirim balasan.'))
+      .finally(() => {
+        btn.innerText = "Kirim Balasan";
+        btn.disabled = false;
+      });
     }
   </script>
 </body>
