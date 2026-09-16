@@ -80,8 +80,7 @@
       <p class="text-left text-gray-600 dark:text-gray-400 mt-2 text-xs md:text-sm max-w-md mx-auto font-medium">Struktur kepemimpinan dan perangkat desa yang berkomitmen untuk mengayomi, mendengarkan aspirasi, serta menjalankan tata kelola pemerintahan desa yang responsif dan berintegritas.</p>
 
       <!-- Grid Perangkat Desa -->
-      <!-- SESUDAH (Lebih stabil di semua device) -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
 
         <!-- 1. Kepala Desa -->
         <div class="bg-stone-50 dark:bg-gray-800 p-6 rounded-3xl border border-gray-200/70 dark:border-gray-700 shadow-md hover:border-emerald-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-left flex flex-col justify-between">
@@ -215,88 +214,196 @@
     </div>
   </section>
 
-<!-- FORMULIR BUKU TAMU -->
+  <!-- FORMULIR BUKU TAMU & CEK STATUS -->
 <section class="py-8 px-4 md:px-8 bg-transparent">
-  <div class="max-w-xl mx-auto bg-stone-50 dark:bg-gray-800 p-6 md:p-8 rounded-3xl border border-gray-200/70 dark:border-gray-700 shadow-md">
-    <div class="text-center mb-6">
-      <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-950 px-3 py-1 rounded-full">Buku Tamu Online</span>
-      <h3 class="text-xl font-extrabold mt-2 text-gray-900 dark:text-white">Kirim Pesan & Aspirasi</h3>
-      <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Data Anda akan langsung tersimpan ke database desa.</p>
+  <div class="max-w-xl mx-auto space-y-6">
+    
+    <!-- Tab Navigasi Sederhana -->
+    <div class="flex bg-stone-200 dark:bg-gray-700 p-1 rounded-2xl text-xs font-bold">
+      <button onclick="switchTab('kirim')" id="tabKirim" class="flex-1 py-2 rounded-xl bg-white dark:bg-gray-800 shadow text-emerald-600 dark:text-emerald-400">Kirim Aspirasi</button>
+      <button onclick="switchTab('cek')" id="tabCek" class="flex-1 py-2 rounded-xl text-gray-500 dark:text-gray-300">Cek Status Pesan</button>
     </div>
 
-    <form id="formDatabase" class="space-y-4 text-left">
-      <div>
-        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Nama Lengkap</label>
-        <input type="text" id="inputNama" required placeholder="Masukkan nama Anda..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500">
+    <!-- FORM 1: Kirim Pesan -->
+    <div id="formKirimContainer" class="bg-stone-50 dark:bg-gray-800 p-6 md:p-8 rounded-3xl border border-gray-200/70 dark:border-gray-700 shadow-md">
+      <div class="text-center mb-6">
+        <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-950 px-3 py-1 rounded-full">Buku Tamu Online</span>
+        <h3 class="text-xl font-extrabold mt-2 text-gray-900 dark:text-white">Kirim Pesan & Aspirasi</h3>
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Anda akan mendapatkan kode token unik untuk memantau status pesan.</p>
       </div>
-      
-      <div>
-    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Email</label>
-    <input type="email" id="inputEmail" required placeholder="Masukkan email Anda..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500">
-      </div>
-        
-      <div>
-        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Pesan / Masukan</label>
-        <textarea id="inputPesan" rows="3" required placeholder="Tuliskan pesan atau masukan untuk desa..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500"></textarea>
-      </div>
-      <button type="submit" id="btnKirim" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-2xl text-xs transition duration-300 shadow-lg shadow-emerald-600/20">
-        Kirim ke Database
-      </button>
-    </form>
 
-    <!-- TOMBOL KHUSUS ADMIN (DITAMBAHKAN DI SINI) -->
-    <div class="mt-6 pt-4 border-t border-gray-200/60 dark:border-gray-700/60 text-center">
+      <form id="formDatabase" class="space-y-4 text-left">
+        <div>
+          <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Nama Lengkap</label>
+          <input type="text" id="inputNama" required placeholder="Masukkan nama Anda..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Email</label>
+          <input type="email" id="inputEmail" required placeholder="Masukkan email Anda..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Pesan / Masukan</label>
+          <textarea id="inputPesan" rows="3" required placeholder="Tuliskan pesan atau masukan..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500"></textarea>
+        </div>
+        <button type="submit" id="btnKirim" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-2xl text-xs transition duration-300 shadow-lg shadow-emerald-600/20">
+          Kirim ke Database
+        </button>
+      </form>
+
+      <!-- Hasil Token Muncul di Sini -->
+      <div id="hasilToken" class="hidden mt-6 p-4 bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 rounded-2xl text-center">
+        <p class="text-xs text-emerald-800 dark:text-emerald-200 font-medium">Pesan berhasil dikirim! Simpan Kode Token Anda:</p>
+        <div class="text-lg font-black tracking-wider text-emerald-700 dark:text-emerald-400 my-2 select-all" id="textToken">MSR-XXXXX</div>
+        <p class="text-[10px] text-gray-500 dark:text-gray-400">Gunakan token ini pada tab "Cek Status Pesan" untuk melihat balasan admin.</p>
+      </div>
+    </div>
+
+    <!-- FORM 2: Cek Status Pesan -->
+    <div id="formCekContainer" class="hidden bg-stone-50 dark:bg-gray-800 p-6 md:p-8 rounded-3xl border border-gray-200/70 dark:border-gray-700 shadow-md">
+      <div class="text-center mb-6">
+        <h3 class="text-xl font-extrabold text-gray-900 dark:text-white">Lacak Pesan Anda</h3>
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Masukkan kode token yang kamu dapatkan saat mengirim pesan.</p>
+      </div>
+
+      <div class="flex gap-2 mb-6">
+        <input type="text" id="inputTokenCek" placeholder="Contoh: MSR-8X92K" class="flex-1 p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white uppercase font-mono focus:outline-none focus:border-emerald-500">
+        <button onclick="cekStatusPesan()" id="btnCek" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 rounded-2xl text-xs transition">
+          Cek
+        </button>
+      </div>
+
+      <!-- Result Card mirip Tampilan Chat -->
+      <div id="detailPesan" class="hidden space-y-3 p-4 bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center text-[10px] border-b pb-2 dark:border-gray-800">
+          <span class="text-gray-500" id="tglPesan">-</span>
+          <span id="badgeStatus" class="px-2 py-0.5 rounded-full font-bold">Status</span>
+        </div>
+        
+        <!-- Bubble Pesan Pengirim -->
+        <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded-xl text-xs">
+          <p class="font-bold text-[10px] text-gray-400 mb-1">Pesan Kamu:</p>
+          <p id="isiPesanPengirim" class="text-gray-800 dark:text-gray-200"></p>
+        </div>
+
+        <!-- Bubble Balasan Admin -->
+        <div id="boxBalasanAdmin" class="bg-emerald-50 dark:bg-emerald-950/60 p-3 rounded-xl text-xs border border-emerald-100 dark:border-emerald-900">
+          <p class="font-bold text-[10px] text-emerald-600 dark:text-emerald-400 mb-1 flex items-center gap-1">
+            <i class="fa-solid fa-user-shield"></i> Tanggapan Admin Desa:
+          </p>
+          <p id="isiBalasanAdmin" class="text-gray-800 dark:text-gray-200 italic">Belum ada balasan dari admin.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Akses Admin -->
+    <div class="pt-2 text-center">
       <a href="admin.html" class="inline-flex items-center gap-1.5 text-xs text-gray-500 hover:text-emerald-600 dark:text-gray-400 dark:hover:text-emerald-400 font-semibold transition">
         <i class="fa-solid fa-user-shield"></i> Akses Panel Admin Desa
       </a>
     </div>
-    
+
   </div>
 </section>
 
 <script>
-  // Tempelkan URL Web App dari Google Apps Script kamu di bawah
-  const apiURL = 'https://script.google.com/macros/s/AKfycbxWVbAmeKGx8XTO240fKjTOtL8GHPc9gI0tjJnpqr9l8uDz2zV0zpeq10diJz9rwblZ/exec'; 
-  const form = document.getElementById('formDatabase');
-  const btnKirim = document.getElementById('btnKirim');
+  const apiURL = 'https://script.google.com/macros/s/AKfycbyM67pvzp7zu1VMx7M6dIIZvA1vgAogBzizWi_UfqHoafSBgXwW2wVUt5aJdZ_RLfeb/exec';
 
-  form.addEventListener('submit', e => {
+  // Tab Switcher
+  function switchTab(type) {
+    const kContainer = document.getElementById('formKirimContainer');
+    const cContainer = document.getElementById('formCekContainer');
+    const tKirim = document.getElementById('tabKirim');
+    const tCek = document.getElementById('tabCek');
+
+    if (type === 'kirim') {
+      kContainer.classList.remove('hidden');
+      cContainer.classList.add('hidden');
+      tKirim.className = "flex-1 py-2 rounded-xl bg-white dark:bg-gray-800 shadow text-emerald-600 dark:text-emerald-400";
+      tCek.className = "flex-1 py-2 rounded-xl text-gray-500 dark:text-gray-300";
+    } else {
+      kContainer.classList.add('hidden');
+      cContainer.classList.remove('hidden');
+      tCek.className = "flex-1 py-2 rounded-xl bg-white dark:bg-gray-800 shadow text-emerald-600 dark:text-emerald-400";
+      tKirim.className = "flex-1 py-2 rounded-xl text-gray-500 dark:text-gray-300";
+    }
+  }
+
+  // Kirim Pesan & Generate Token
+  document.getElementById('formDatabase').addEventListener('submit', e => {
     e.preventDefault();
-    btnKirim.innerText = "Mengirim...";
-    btnKirim.disabled = true;
+    const btn = document.getElementById('btnKirim');
+    btn.innerText = "Mengirim...";
+    btn.disabled = true;
 
-    const namaInput = document.getElementById('inputNama').value;
-    const emailInput = document.getElementById('inputEmail').value;
-    const pesanInput = document.getElementById('inputPesan').value;
+    // Generate Token Acak (Contoh: MSR-8K92)
+    const token = 'MSR-' + Math.random().toString(36).substring(2, 7).toUpperCase();
+
+    const data = {
+      action: 'kirimPesan',
+      token: token,
+      nama: document.getElementById('inputNama').value,
+      email: document.getElementById('inputEmail').value,
+      pesan: document.getElementById('inputPesan').value
+    };
 
     fetch(apiURL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'text/plain;charset=utf-8'
-      },
-      body: JSON.stringify({
-        nama: namaInput,
-        email: emailInput,
-        pesan: pesanInput
-      })
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(data)
     })
-    .then(response => response.json())
-    .then(data => {
-      alert('Terima kasih! Pesan berhasil dikirim dan tersimpan di database.');
-      form.reset();
+    .then(res => res.json())
+    .then(res => {
+      document.getElementById('hasilToken').classList.remove('hidden');
+      document.getElementById('textToken').innerText = token;
+      document.getElementById('formDatabase').reset();
     })
-    .catch(error => {
-      console.error('Error!', error);
-      alert('Gagal mengirim pesan, silakan coba lagi.');
-    })
+    .catch(err => alert('Gagal mengirim pesan.'))
     .finally(() => {
-      btnKirim.innerText = "Kirim ke Database";
-      btnKirim.disabled = false;
+      btn.innerText = "Kirim ke Database";
+      btn.disabled = false;
     });
   });
+
+  // Cek Status Pesan via Token
+  function cekStatusPesan() {
+    const token = document.getElementById('inputTokenCek').value.trim();
+    const btn = document.getElementById('btnCek');
+    if (!token) return alert('Masukkan kode token!');
+
+    btn.innerText = "...";
+    btn.disabled = true;
+
+    fetch(`${apiURL}?action=cekStatus&token=${token}`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === 'not_found') {
+        alert('Token tidak ditemukan. Periksa kembali kode token kamu.');
+        document.getElementById('detailPesan').classList.add('hidden');
+      } else {
+        document.getElementById('detailPesan').classList.remove('hidden');
+        document.getElementById('tglPesan').innerText = data.tanggal;
+        document.getElementById('isiPesanPengirim').innerText = data.pesan;
+        document.getElementById('isiBalasanAdmin').innerText = data.balasan || 'Belum ada balasan dari admin.';
+
+        const badge = document.getElementById('badgeStatus');
+        if (data.status_baca === 'Sudah Dibaca' || data.balasan) {
+          badge.className = "px-2 py-0.5 rounded-full font-bold bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300";
+          badge.innerText = "✓✓ Dibaca";
+        } else {
+          badge.className = "px-2 py-0.5 rounded-full font-bold bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300";
+          badge.innerText = "✓ Terkirim";
+        }
+      }
+    })
+    .catch(err => alert('Gagal mengecek status.'))
+    .finally(() => {
+      btn.innerText = "Cek";
+      btn.disabled = false;
+    });
+  }
 </script>
 
-  
+   
   <!-- Tombol Kembali ke Beranda -->
   <div class="max-w-5xl mx-auto px-4 pb-16 pt-6">
     <div class="flex items-center justify-between bg-stone-100 dark:bg-gray-800/80 p-5 rounded-3xl border border-gray-200 dark:border-gray-700 shadow-md transition-all duration-300">
