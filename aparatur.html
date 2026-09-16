@@ -370,38 +370,41 @@
     });
   });
 
-  // Cek Status Pesan via Token
+    // Cek Status Pesan via Token (Versi Perbaikan)
   function cekStatusPesan() {
-    const token = document.getElementById('inputTokenCek').value.trim();
+    const inputToken = document.getElementById('inputTokenCek').value.trim().toUpperCase();
     const btn = document.getElementById('btnCek');
-    if (!token) return alert('Masukkan kode token!');
+    if (!inputToken) return alert('Masukkan kode token!');
 
     btn.innerText = "...";
     btn.disabled = true;
 
-    fetch(`${apiURL}?action=cekStatus&token=${token}`)
+    fetch(`${apiURL}?action=cekStatus&token=${encodeURIComponent(inputToken)}`)
     .then(res => res.json())
     .then(data => {
       if (data.status === 'not_found') {
-        alert('Token tidak ditemukan. Periksa kembali kode token kamu.');
+        alert('Token tidak ditemukan. Pastikan huruf dan angkanya sudah benar!');
         document.getElementById('detailPesan').classList.add('hidden');
-      } else {
+      } else if (data.status === 'found') {
         document.getElementById('detailPesan').classList.remove('hidden');
         document.getElementById('tglPesan').innerText = data.tanggal;
         document.getElementById('isiPesanPengirim').innerText = data.pesan;
         document.getElementById('isiBalasanAdmin').innerText = data.balasan || 'Belum ada balasan dari admin.';
 
         const badge = document.getElementById('badgeStatus');
-        if (data.status_baca === 'Sudah Dibaca' || data.balasan) {
+        if (data.status_baca === 'Sudah Dibalas' || data.balasan) {
           badge.className = "px-2 py-0.5 rounded-full font-bold bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300";
-          badge.innerText = "✓✓ Dibaca";
+          badge.innerText = "✓✓ Dibaca / Dibalas";
         } else {
           badge.className = "px-2 py-0.5 rounded-full font-bold bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300";
           badge.innerText = "✓ Terkirim";
         }
       }
     })
-    .catch(err => alert('Gagal mengecek status.'))
+    .catch(err => {
+      console.error(err);
+      alert('Gagal mengecek status. Coba periksa koneksi internet kamu.');
+    })
     .finally(() => {
       btn.innerText = "Cek";
       btn.disabled = false;
