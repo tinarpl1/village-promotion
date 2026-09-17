@@ -257,10 +257,17 @@
           </button>
         </form>
 
-        <!-- Hasil Token Muncul di Sini -->
+        <!-- Hasil Token Muncul di Sini (Sudah Ditambahkan Tombol Salin) -->
         <div id="hasilToken" class="hidden mt-6 p-4 bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 rounded-2xl text-center">
           <p class="text-xs text-emerald-800 dark:text-emerald-200 font-medium">Pesan berhasil dikirim! Simpan Kode Token Anda:</p>
-          <div class="text-lg font-black tracking-wider text-emerald-700 dark:text-emerald-400 my-2 select-all" id="textToken">MSR-XXXXX</div>
+          
+          <div class="flex items-center justify-center gap-3 my-2">
+            <span class="text-lg font-black tracking-wider text-emerald-700 dark:text-emerald-400 select-all" id="textToken">MSR-XXXXX</span>
+            <button type="button" id="btnSalinToken" onclick="salinToken()" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition shadow">
+              <i class="fa-regular fa-copy mr-1"></i> Salin
+            </button>
+          </div>
+
           <p class="text-[10px] text-gray-500 dark:text-gray-400">Gunakan token ini pada tab "Cek Status Pesan" untuk melihat balasan admin.</p>
         </div>
       </div>
@@ -410,6 +417,25 @@
       .finally(() => {
         btn.innerText = "Cek";
         btn.disabled = false;
+      });
+    }
+
+    // Fungsi Salin Token
+    function salinToken() {
+      const textToken = document.getElementById('textToken').innerText;
+      if (!textToken) return;
+
+      navigator.clipboard.writeText(textToken).then(() => {
+        const btnSalin = document.getElementById('btnSalinToken');
+        const textAwal = btnSalin.innerHTML;
+        
+        btnSalin.innerHTML = '<i class="fa-solid fa-check mr-1"></i> Tersalin!';
+        setTimeout(() => {
+          btnSalin.innerHTML = textAwal;
+        }, 2000);
+      }).catch(err => {
+        console.error('Gagal menyalin token:', err);
+        alert('Gagal menyalin token.');
       });
     }
   </script>
