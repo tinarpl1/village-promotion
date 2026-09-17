@@ -4,10 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aparatur & Kontak - Website Desa Mensere</title>
+  
+  <!-- Favicon Icon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='28' fill='%232E7D32'/><text x='48%' y='72%' font-size='65' font-family='Brush Script MT, Great Vibes, cursive' font-style='italic' text-anchor='middle' fill='white'>M</text></svg>">
+  
+  <!-- Script Pengecek Dark Mode dari LocalStorage -->
+  <script>
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config = { darkMode: 'class' }</script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Google Font: Plus Jakarta Sans -->
@@ -30,14 +43,6 @@
   </style>
 </head>
 <body class="bg-stone-50/50 dark:bg-gray-950 text-gray-800 dark:text-gray-100 font-sans antialiased transition-colors duration-300">
-
-  <!-- Floating Dark Mode -->
-  <div class="fixed bottom-5 right-5 z-50">
-    <button onclick="document.documentElement.classList.toggle('dark')" class="p-3.5 bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 text-white rounded-full shadow-2xl hover:scale-110 transition duration-300 flex items-center justify-center">
-      <i class="fa-solid fa-moon text-base dark:hidden"></i>
-      <i class="fa-solid fa-sun text-base hidden dark:block"></i>
-    </button>
-  </div>
 
   <!-- Navbar Lengkap -->
   <nav class="fixed top-3 left-1/2 -translate-x-1/2 w-[92%] max-w-5xl z-50 bg-white/85 dark:bg-gray-900/85 backdrop-blur-md text-gray-800 dark:text-white px-4 md:px-6 py-2.5 shadow-lg shadow-emerald-900/5 border border-gray-200/60 dark:border-gray-800 rounded-full transition-all">
@@ -217,204 +222,198 @@
   </section>
 
   <!-- FORMULIR BUKU TAMU & CEK STATUS -->
-<section class="py-8 px-4 md:px-8 bg-transparent">
-  <div class="max-w-xl mx-auto space-y-6">
-    
-    <!-- Tab Navigasi Sederhana -->
-    <div class="flex bg-stone-200 dark:bg-gray-700 p-1 rounded-2xl text-xs font-bold">
-      <button onclick="switchTab('kirim')" id="tabKirim" class="flex-1 py-2 rounded-xl bg-white dark:bg-gray-800 shadow text-emerald-600 dark:text-emerald-400">Kirim Aspirasi</button>
-      <button onclick="switchTab('cek')" id="tabCek" class="flex-1 py-2 rounded-xl text-gray-500 dark:text-gray-300">Cek Status Pesan</button>
+  <section class="py-8 px-4 md:px-8 bg-transparent">
+    <div class="max-w-xl mx-auto space-y-6">
+      
+      <!-- Tab Navigasi Sederhana -->
+      <div class="flex bg-stone-200 dark:bg-gray-700 p-1 rounded-2xl text-xs font-bold">
+        <button onclick="switchTab('kirim')" id="tabKirim" class="flex-1 py-2 rounded-xl bg-white dark:bg-gray-800 shadow text-emerald-600 dark:text-emerald-400">Kirim Aspirasi</button>
+        <button onclick="switchTab('cek')" id="tabCek" class="flex-1 py-2 rounded-xl text-gray-500 dark:text-gray-300">Cek Status Pesan</button>
+      </div>
+
+      <!-- FORM 1: Kirim Pesan -->
+      <div id="formKirimContainer" class="bg-stone-50 dark:bg-gray-800 p-6 md:p-8 rounded-3xl border border-gray-200/70 dark:border-gray-700 shadow-md">
+        <div class="text-center mb-6">
+          <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-950 px-3 py-1 rounded-full">Buku Tamu Online</span>
+          <h3 class="text-xl font-extrabold mt-2 text-gray-900 dark:text-white">Kirim Pesan & Aspirasi</h3>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Anda akan mendapatkan kode token unik untuk memantau status pesan.</p>
+        </div>
+
+        <form id="formDatabase" class="space-y-4 text-left">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Nama Lengkap</label>
+            <input type="text" id="inputNama" required placeholder="Masukkan nama Anda..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Email</label>
+            <input type="email" id="inputEmail" required placeholder="Masukkan email Anda..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Pesan / Masukan</label>
+            <textarea id="inputPesan" rows="3" required placeholder="Tuliskan pesan atau masukan..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500"></textarea>
+          </div>
+          <button type="submit" id="btnKirim" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-2xl text-xs transition duration-300 shadow-lg shadow-emerald-600/20">
+            Kirim ke Database
+          </button>
+        </form>
+
+        <!-- Hasil Token Muncul di Sini -->
+        <div id="hasilToken" class="hidden mt-6 p-4 bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 rounded-2xl text-center">
+          <p class="text-xs text-emerald-800 dark:text-emerald-200 font-medium">Pesan berhasil dikirim! Simpan Kode Token Anda:</p>
+          <div class="text-lg font-black tracking-wider text-emerald-700 dark:text-emerald-400 my-2 select-all" id="textToken">MSR-XXXXX</div>
+          <p class="text-[10px] text-gray-500 dark:text-gray-400">Gunakan token ini pada tab "Cek Status Pesan" untuk melihat balasan admin.</p>
+        </div>
+      </div>
+
+      <!-- FORM 2: Cek Status Pesan -->
+      <div id="formCekContainer" class="hidden bg-stone-50 dark:bg-gray-800 p-6 md:p-8 rounded-3xl border border-gray-200/70 dark:border-gray-700 shadow-md">
+        <div class="text-center mb-6">
+          <h3 class="text-xl font-extrabold text-gray-900 dark:text-white">Lacak Pesan Anda</h3>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Masukkan kode token yang kamu dapatkan saat mengirim pesan.</p>
+        </div>
+
+        <div class="flex gap-2 mb-6">
+          <input type="text" id="inputTokenCek" placeholder="Contoh: MSR-8X92K" class="flex-1 p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white uppercase font-mono focus:outline-none focus:border-emerald-500">
+          <button onclick="cekStatusPesan()" id="btnCek" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 rounded-2xl text-xs transition">
+            Cek
+          </button>
+        </div>
+
+        <!-- Result Card mirip Tampilan Chat -->
+        <div id="detailPesan" class="hidden space-y-3 p-4 bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700">
+          <div class="flex justify-between items-center text-[10px] border-b pb-2 dark:border-gray-800">
+            <span class="text-gray-500" id="tglPesan">-</span>
+            <span id="badgeStatus" class="px-2 py-0.5 rounded-full font-bold">Status</span>
+          </div>
+          
+          <!-- Bubble Pesan Pengirim -->
+          <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded-xl text-xs">
+            <p class="font-bold text-[10px] text-gray-400 mb-1">Pesan Kamu:</p>
+            <p id="isiPesanPengirim" class="text-gray-800 dark:text-gray-200"></p>
+          </div>
+
+          <!-- Bubble Balasan Admin -->
+          <div id="boxBalasanAdmin" class="bg-emerald-50 dark:bg-emerald-950/60 p-3 rounded-xl text-xs border border-emerald-100 dark:border-emerald-900">
+            <p class="font-bold text-[10px] text-emerald-600 dark:text-emerald-400 mb-1 flex items-center gap-1">
+              <i class="fa-solid fa-user-shield"></i> Tanggapan Admin Desa:
+            </p>
+            <p id="isiBalasanAdmin" class="text-gray-800 dark:text-gray-200 italic">Belum ada balasan dari admin.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Akses Admin -->
+      <div class="pt-2 text-center">
+        <a href="admin.html" class="inline-flex items-center gap-1.5 text-xs text-gray-500 hover:text-emerald-600 dark:text-gray-400 dark:hover:text-emerald-400 font-semibold transition">
+          <i class="fa-solid fa-user-shield"></i> Akses Panel Admin Desa
+        </a>
+      </div>
+
     </div>
+  </section>
 
-    <!-- FORM 1: Kirim Pesan -->
-    <div id="formKirimContainer" class="bg-stone-50 dark:bg-gray-800 p-6 md:p-8 rounded-3xl border border-gray-200/70 dark:border-gray-700 shadow-md">
-      <div class="text-center mb-6">
-        <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-950 px-3 py-1 rounded-full">Buku Tamu Online</span>
-        <h3 class="text-xl font-extrabold mt-2 text-gray-900 dark:text-white">Kirim Pesan & Aspirasi</h3>
-        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Anda akan mendapatkan kode token unik untuk memantau status pesan.</p>
-      </div>
+  <script>
+    const apiURL = 'https://script.google.com/macros/s/AKfycbz4kCowral5gYkxpLbMYRsvd14ECVqSeOh4NhThEU7DPOFxFR4Zb4Ck2aHkfxB72wgT/exec';
 
-      <form id="formDatabase" class="space-y-4 text-left">
-        <div>
-          <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Nama Lengkap</label>
-          <input type="text" id="inputNama" required placeholder="Masukkan nama Anda..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Email</label>
-          <input type="email" id="inputEmail" required placeholder="Masukkan email Anda..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Pesan / Masukan</label>
-          <textarea id="inputPesan" rows="3" required placeholder="Tuliskan pesan atau masukan..." class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500"></textarea>
-        </div>
-        <button type="submit" id="btnKirim" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-2xl text-xs transition duration-300 shadow-lg shadow-emerald-600/20">
-          Kirim ke Database
-        </button>
-      </form>
+    // Tab Switcher
+    function switchTab(type) {
+      const kContainer = document.getElementById('formKirimContainer');
+      const cContainer = document.getElementById('formCekContainer');
+      const tKirim = document.getElementById('tabKirim');
+      const tCek = document.getElementById('tabCek');
 
-      <!-- Hasil Token Muncul di Sini -->
-      <div id="hasilToken" class="hidden mt-6 p-4 bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 rounded-2xl text-center">
-        <p class="text-xs text-emerald-800 dark:text-emerald-200 font-medium">Pesan berhasil dikirim! Simpan Kode Token Anda:</p>
-        <div class="text-lg font-black tracking-wider text-emerald-700 dark:text-emerald-400 my-2 select-all" id="textToken">MSR-XXXXX</div>
-        <p class="text-[10px] text-gray-500 dark:text-gray-400">Gunakan token ini pada tab "Cek Status Pesan" untuk melihat balasan admin.</p>
-      </div>
-    </div>
-
-    <!-- FORM 2: Cek Status Pesan -->
-    <div id="formCekContainer" class="hidden bg-stone-50 dark:bg-gray-800 p-6 md:p-8 rounded-3xl border border-gray-200/70 dark:border-gray-700 shadow-md">
-      <div class="text-center mb-6">
-        <h3 class="text-xl font-extrabold text-gray-900 dark:text-white">Lacak Pesan Anda</h3>
-        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Masukkan kode token yang kamu dapatkan saat mengirim pesan.</p>
-      </div>
-
-      <div class="flex gap-2 mb-6">
-        <input type="text" id="inputTokenCek" placeholder="Contoh: MSR-8X92K" class="flex-1 p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-900 dark:text-white uppercase font-mono focus:outline-none focus:border-emerald-500">
-        <button onclick="cekStatusPesan()" id="btnCek" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 rounded-2xl text-xs transition">
-          Cek
-        </button>
-      </div>
-
-      <!-- Result Card mirip Tampilan Chat -->
-      <div id="detailPesan" class="hidden space-y-3 p-4 bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700">
-        <div class="flex justify-between items-center text-[10px] border-b pb-2 dark:border-gray-800">
-          <span class="text-gray-500" id="tglPesan">-</span>
-          <span id="badgeStatus" class="px-2 py-0.5 rounded-full font-bold">Status</span>
-        </div>
-        
-        <!-- Bubble Pesan Pengirim -->
-        <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded-xl text-xs">
-          <p class="font-bold text-[10px] text-gray-400 mb-1">Pesan Kamu:</p>
-          <p id="isiPesanPengirim" class="text-gray-800 dark:text-gray-200"></p>
-        </div>
-
-        <!-- Bubble Balasan Admin -->
-        <div id="boxBalasanAdmin" class="bg-emerald-50 dark:bg-emerald-950/60 p-3 rounded-xl text-xs border border-emerald-100 dark:border-emerald-900">
-          <p class="font-bold text-[10px] text-emerald-600 dark:text-emerald-400 mb-1 flex items-center gap-1">
-            <i class="fa-solid fa-user-shield"></i> Tanggapan Admin Desa:
-          </p>
-          <p id="isiBalasanAdmin" class="text-gray-800 dark:text-gray-200 italic">Belum ada balasan dari admin.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Akses Admin -->
-    <div class="pt-2 text-center">
-      <a href="admin.html" class="inline-flex items-center gap-1.5 text-xs text-gray-500 hover:text-emerald-600 dark:text-gray-400 dark:hover:text-emerald-400 font-semibold transition">
-        <i class="fa-solid fa-user-shield"></i> Akses Panel Admin Desa
-      </a>
-    </div>
-
-  </div>
-</section>
-
-<script>
-  const apiURL = 'https://script.google.com/macros/s/AKfycbz4kCowral5gYkxpLbMYRsvd14ECVqSeOh4NhThEU7DPOFxFR4Zb4Ck2aHkfxB72wgT/exec';
-
-  // Tab Switcher
-  function switchTab(type) {
-    const kContainer = document.getElementById('formKirimContainer');
-    const cContainer = document.getElementById('formCekContainer');
-    const tKirim = document.getElementById('tabKirim');
-    const tCek = document.getElementById('tabCek');
-
-    if (type === 'kirim') {
-      kContainer.classList.remove('hidden');
-      cContainer.classList.add('hidden');
-      tKirim.className = "flex-1 py-2 rounded-xl bg-white dark:bg-gray-800 shadow text-emerald-600 dark:text-emerald-400";
-      tCek.className = "flex-1 py-2 rounded-xl text-gray-500 dark:text-gray-300";
-    } else {
-      kContainer.classList.add('hidden');
-      cContainer.classList.remove('hidden');
-      tCek.className = "flex-1 py-2 rounded-xl bg-white dark:bg-gray-800 shadow text-emerald-600 dark:text-emerald-400";
-      tKirim.className = "flex-1 py-2 rounded-xl text-gray-500 dark:text-gray-300";
-    }
-  }
-
-    // Kirim Pesan & Generate Token (Versi Perbaikan)
-  document.getElementById('formDatabase').addEventListener('submit', e => {
-    e.preventDefault();
-    const btn = document.getElementById('btnKirim');
-    btn.innerText = "Mengirim...";
-    btn.disabled = true;
-
-    // Generate Token Acak
-    const token = 'MSR-' + Math.random().toString(36).substring(2, 7).toUpperCase();
-
-    // Gunakan URLSearchParams agar tidak diblokir CORS browser
-    const formData = new URLSearchParams();
-    formData.append('action', 'kirimPesan');
-    formData.append('token', token);
-    formData.append('nama', document.getElementById('inputNama').value);
-    formData.append('email', document.getElementById('inputEmail').value);
-    formData.append('pesan', document.getElementById('inputPesan').value);
-
-    fetch(apiURL, {
-      method: 'POST',
-      body: formData
-    })
-    .then(res => res.json())
-    .then(res => {
-      // Tampilkan token di layar
-      document.getElementById('hasilToken').classList.remove('hidden');
-      document.getElementById('textToken').innerText = token;
-      document.getElementById('formDatabase').reset();
-    })
-    .catch(err => {
-      // Karena data sebenarnya masuk, jika respon JSON diblokir browser, 
-      // kita tetap tampilkan token ke pengguna
-      document.getElementById('hasilToken').classList.remove('hidden');
-      document.getElementById('textToken').innerText = token;
-      document.getElementById('formDatabase').reset();
-    })
-    .finally(() => {
-      btn.innerText = "Kirim ke Database";
-      btn.disabled = false;
-    });
-  });
-
-    // Cek Status Pesan via Token (Versi Perbaikan)
-  function cekStatusPesan() {
-    const inputToken = document.getElementById('inputTokenCek').value.trim().toUpperCase();
-    const btn = document.getElementById('btnCek');
-    if (!inputToken) return alert('Masukkan kode token!');
-
-    btn.innerText = "...";
-    btn.disabled = true;
-
-    fetch(`${apiURL}?action=cekStatus&token=${encodeURIComponent(inputToken)}`)
-    .then(res => res.json())
-    .then(data => {
-      if (data.status === 'not_found') {
-        alert('Token tidak ditemukan. Pastikan huruf dan angkanya sudah benar!');
-        document.getElementById('detailPesan').classList.add('hidden');
-      } else if (data.status === 'found') {
-        document.getElementById('detailPesan').classList.remove('hidden');
-        document.getElementById('tglPesan').innerText = data.tanggal;
-        document.getElementById('isiPesanPengirim').innerText = data.pesan;
-        document.getElementById('isiBalasanAdmin').innerText = data.balasan || 'Belum ada balasan dari admin.';
-
-        const badge = document.getElementById('badgeStatus');
-        if (data.status_baca === 'Sudah Dibalas' || data.balasan) {
-          badge.className = "px-2 py-0.5 rounded-full font-bold bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300";
-          badge.innerText = "✓✓ Dibaca / Dibalas";
-        } else {
-          badge.className = "px-2 py-0.5 rounded-full font-bold bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300";
-          badge.innerText = "✓ Terkirim";
-        }
+      if (type === 'kirim') {
+        kContainer.classList.remove('hidden');
+        cContainer.classList.add('hidden');
+        tKirim.className = "flex-1 py-2 rounded-xl bg-white dark:bg-gray-800 shadow text-emerald-600 dark:text-emerald-400";
+        tCek.className = "flex-1 py-2 rounded-xl text-gray-500 dark:text-gray-300";
+      } else {
+        kContainer.classList.add('hidden');
+        cContainer.classList.remove('hidden');
+        tCek.className = "flex-1 py-2 rounded-xl bg-white dark:bg-gray-800 shadow text-emerald-600 dark:text-emerald-400";
+        tKirim.className = "flex-1 py-2 rounded-xl text-gray-500 dark:text-gray-300";
       }
-    })
-    .catch(err => {
-      console.error(err);
-      alert('Gagal mengecek status. Coba periksa koneksi internet kamu.');
-    })
-    .finally(() => {
-      btn.innerText = "Cek";
-      btn.disabled = false;
-    });
-  }
-</script>
+    }
 
-   
+    // Kirim Pesan & Generate Token
+    document.getElementById('formDatabase').addEventListener('submit', e => {
+      e.preventDefault();
+      const btn = document.getElementById('btnKirim');
+      btn.innerText = "Mengirim...";
+      btn.disabled = true;
+
+      const token = 'MSR-' + Math.random().toString(36).substring(2, 7).toUpperCase();
+
+      const formData = new URLSearchParams();
+      formData.append('action', 'kirimPesan');
+      formData.append('token', token);
+      formData.append('nama', document.getElementById('inputNama').value);
+      formData.append('email', document.getElementById('inputEmail').value);
+      formData.append('pesan', document.getElementById('inputPesan').value);
+
+      fetch(apiURL, {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.json())
+      .then(res => {
+        document.getElementById('hasilToken').classList.remove('hidden');
+        document.getElementById('textToken').innerText = token;
+        document.getElementById('formDatabase').reset();
+      })
+      .catch(err => {
+        document.getElementById('hasilToken').classList.remove('hidden');
+        document.getElementById('textToken').innerText = token;
+        document.getElementById('formDatabase').reset();
+      })
+      .finally(() => {
+        btn.innerText = "Kirim ke Database";
+        btn.disabled = false;
+      });
+    });
+
+    // Cek Status Pesan via Token
+    function cekStatusPesan() {
+      const inputToken = document.getElementById('inputTokenCek').value.trim().toUpperCase();
+      const btn = document.getElementById('btnCek');
+      if (!inputToken) return alert('Masukkan kode token!');
+
+      btn.innerText = "...";
+      btn.disabled = true;
+
+      fetch(`${apiURL}?action=cekStatus&token=${encodeURIComponent(inputToken)}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'not_found') {
+          alert('Token tidak ditemukan. Pastikan huruf dan angkanya sudah benar!');
+          document.getElementById('detailPesan').classList.add('hidden');
+        } else if (data.status === 'found') {
+          document.getElementById('detailPesan').classList.remove('hidden');
+          document.getElementById('tglPesan').innerText = data.tanggal;
+          document.getElementById('isiPesanPengirim').innerText = data.pesan;
+          document.getElementById('isiBalasanAdmin').innerText = data.balasan || 'Belum ada balasan dari admin.';
+
+          const badge = document.getElementById('badgeStatus');
+          if (data.status_baca === 'Sudah Dibalas' || data.balasan) {
+            badge.className = "px-2 py-0.5 rounded-full font-bold bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300";
+            badge.innerText = "✓✓ Dibaca / Dibalas";
+          } else {
+            badge.className = "px-2 py-0.5 rounded-full font-bold bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300";
+            badge.innerText = "✓ Terkirim";
+          }
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert('Gagal mengecek status. Coba periksa koneksi internet kamu.');
+      })
+      .finally(() => {
+        btn.innerText = "Cek";
+        btn.disabled = false;
+      });
+    }
+  </script>
+
   <!-- Tombol Kembali ke Beranda -->
   <div class="max-w-5xl mx-auto px-4 pb-16 pt-6">
     <div class="flex items-center justify-between bg-stone-100 dark:bg-gray-800/80 p-5 rounded-3xl border border-gray-200 dark:border-gray-700 shadow-md transition-all duration-300">
@@ -434,5 +433,26 @@
   <footer class="bg-emerald-950 text-white py-8 px-4 text-center text-xs font-medium">
     <p>© 2026 Desa Mensere. All rights reserved.</p>
   </footer>
+  
+  <!-- Tombol Floating Dark Mode (Tunggal & Menyimpan ke LocalStorage) -->
+  <div class="fixed bottom-5 right-5 z-50">
+    <button onclick="toggleDarkMode()" class="p-3.5 bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 text-white rounded-full shadow-2xl hover:scale-110 transition duration-300 flex items-center justify-center">
+      <i class="fa-solid fa-moon text-base dark:hidden"></i>
+      <i class="fa-solid fa-sun text-base hidden dark:block"></i>
+    </button>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+  </script>
+
 </body>
 </html>
