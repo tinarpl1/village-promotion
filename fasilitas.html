@@ -6,6 +6,15 @@
   <title>Fasilitas Publik - Website Desa Mensere</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='28' fill='%232E7D32'/><text x='48%' y='72%' font-size='65' font-family='Brush Script MT, Great Vibes, cursive' font-style='italic' text-anchor='middle' fill='white'>M</text></svg>">
 
+  <!-- Script Pengecek Dark Mode dari LocalStorage -->
+  <script>
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config = { darkMode: 'class' }</script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -28,14 +37,6 @@
   </style>
 </head>
 <body class="bg-stone-50/50 dark:bg-gray-950 text-gray-800 dark:text-gray-100 font-sans antialiased transition-colors duration-300">
-
-  <!-- Floating Dark Mode -->
-  <div class="fixed bottom-5 right-5 z-50">
-    <button onclick="document.documentElement.classList.toggle('dark')" class="p-3.5 bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 text-white rounded-full shadow-2xl hover:scale-110 transition duration-300 flex items-center justify-center">
-      <i class="fa-solid fa-moon text-base dark:hidden"></i>
-      <i class="fa-solid fa-sun text-base hidden dark:block"></i>
-    </button>
-  </div>
 
   <!-- Navbar Lengkap -->
   <nav class="fixed top-3 left-1/2 -translate-x-1/2 w-[92%] max-w-5xl z-50 bg-white/85 dark:bg-gray-900/85 backdrop-blur-md text-gray-800 dark:text-white px-4 md:px-6 py-2.5 shadow-lg shadow-emerald-900/5 border border-gray-200/60 dark:border-gray-800 rounded-full transition-all">
@@ -69,17 +70,17 @@
   </nav>
 
   <!-- Konten Utama -->
-  <section class="py-28 px-4 md:px-8 bg-white dark:bg-gray-900 min-h-screen">
+  <section class="py-28 px-4 md:px-8 bg-transparent min-h-screen">
     <div class="max-w-5xl mx-auto animate-fade-in">
       <div class="text-center md:text-left mb-8">
         <span class="text-[11px] font-extrabold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-3.5 py-1 rounded-md border border-emerald-200/50 dark:border-emerald-800">Sarana Publik</span>
         <h2 class="text-2xl md:text-4xl font-extrabold mt-3 text-gray-900 dark:text-white">
           Fasilitas <span class="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">Desa Mensere</span>
         </h2>
-        <p class="text-left text-gray-600 dark:text-gray-400 mt-2 text-xs md:text-sm font-medium">Menyediakan berbagai sarana dan prasarana umum yang dirancang untuk mendukung kelancaran pelayanan administrasi, kegiatan keagamaan, serta aktivitas olahraga guna meningkatkan kualitas hidup dan keharmonisan seluruh warga Desa Mensere.</p>
+        <p class="text-left text-gray-600 dark:text-gray-400 mt-2 text-xs md:text-sm font-medium max-w-2xl">Menyediakan berbagai sarana dan prasarana umum yang dirancang untuk mendukung kelancaran pelayanan administrasi, kegiatan keagamaan, serta aktivitas olahraga guna meningkatkan kualitas hidup dan keharmonisan seluruh warga Desa Mensere.</p>
       </div>
 
-      <!-- Grid Fasilitas yang Diperbaiki -->
+      <!-- Grid Fasilitas -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
         
         <!-- 1. Balai Desa -->
@@ -147,5 +148,26 @@
   <footer class="bg-emerald-950 text-white py-8 px-4 text-center text-xs font-medium">
     <p>© 2026 Desa Mensere. All rights reserved.</p>
   </footer>
+
+  <!-- Floating Dark Mode (Tunggal & Menyimpan ke LocalStorage) -->
+  <div class="fixed bottom-5 right-5 z-50">
+    <button onclick="toggleDarkMode()" class="p-3.5 bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 text-white rounded-full shadow-2xl hover:scale-110 transition duration-300 flex items-center justify-center">
+      <i class="fa-solid fa-moon text-base dark:hidden"></i>
+      <i class="fa-solid fa-sun text-base hidden dark:block"></i>
+    </button>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+  </script>
+
 </body>
 </html>
