@@ -4,15 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panel Admin - Desa Mensere</title>
+  
   <!-- Favicon Ikon Website -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='28' fill='%232E7D32'/><text x='48%' y='72%' font-size='65' font-family='Brush Script MT, Great Vibes, cursive' font-style='italic' text-anchor='middle' fill='white'>M</text></svg>">
 
+  <!-- Script Pengecek Dark Mode dari LocalStorage -->
+  <script>
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
 </head>
-<body class="bg-gray-100 min-h-screen text-gray-800 antialiased">
+<body class="bg-gray-100 dark:bg-gray-900 min-h-screen text-gray-800 dark:text-gray-100 antialiased transition-colors duration-300">
 
   <!-- Header Admin -->
   <header class="bg-emerald-900 text-white py-4 px-6 shadow-md flex justify-between items-center">
@@ -29,15 +44,15 @@
   <main class="max-w-4xl mx-auto p-4 md:p-6">
 
     <!-- Form Login Password Admin -->
-    <div id="loginBox" class="bg-white p-8 rounded-3xl shadow-md border border-gray-200 max-w-md mx-auto mt-12 text-center">
-      <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-xl mb-3">
+    <div id="loginBox" class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-md border border-gray-200 dark:border-gray-700 max-w-md mx-auto mt-12 text-center transition-colors">
+      <div class="w-14 h-14 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto text-xl mb-3">
         <i class="fa-solid fa-lock"></i>
       </div>
-      <h2 class="text-xl font-bold text-gray-900">Akses Panel Admin</h2>
-      <p class="text-xs text-gray-500 mt-1 mb-6">Masukkan kata sandi admin untuk melihat dan membalas aspirasi warga.</p>
+      <h2 class="text-xl font-bold text-gray-900 dark:text-white">Akses Panel Admin</h2>
+      <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 mb-6">Masukkan kata sandi admin untuk melihat dan membalas aspirasi warga.</p>
       
       <div class="space-y-4">
-        <input type="password" id="inputPass" placeholder="Masukkan Password Admin" class="w-full p-3 text-xs rounded-2xl border border-gray-300 focus:outline-none focus:border-emerald-500 text-center font-bold">
+        <input type="password" id="inputPass" placeholder="Masukkan Password Admin" class="w-full p-3 text-xs rounded-2xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500 text-center font-bold">
         <button onclick="loginAdmin()" id="btnLogin" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-2xl text-xs transition shadow-lg shadow-emerald-600/20">
           Masuk Dashboard
         </button>
@@ -47,12 +62,12 @@
     <!-- Dashboard Pesan (Tersembunyi Sebelum Login) -->
     <div id="dashboardBox" class="hidden space-y-6">
       
-      <div class="flex justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-gray-200">
+      <div class="flex justify-between items-center bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 transition-colors">
         <div>
-          <h3 class="font-bold text-base text-gray-900">Daftar Aspirasi Warga</h3>
-          <p class="text-xs text-gray-500">Kelola dan tanggapi pesan yang dikirim oleh warga desa.</p>
+          <h3 class="font-bold text-base text-gray-900 dark:text-white">Daftar Aspirasi Warga</h3>
+          <p class="text-xs text-gray-500 dark:text-gray-400">Kelola dan tanggapi pesan yang dikirim oleh warga desa.</p>
         </div>
-        <button onclick="loadPesan()" class="bg-emerald-100 text-emerald-700 hover:bg-emerald-200 px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+        <button onclick="loadPesan()" class="bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-200 dark:hover:bg-emerald-800 px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
           <i class="fa-solid fa-rotate"></i> Refresh Data
         </button>
       </div>
@@ -66,7 +81,26 @@
 
   </main>
 
+  <!-- Tombol Floating Dark Mode -->
+  <div class="fixed bottom-5 right-5 z-50">
+    <button onclick="toggleDarkMode()" class="p-3.5 bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 text-white rounded-full shadow-2xl hover:scale-110 transition duration-300 flex items-center justify-center">
+      <i class="fa-solid fa-moon text-base dark:hidden"></i>
+      <i class="fa-solid fa-sun text-base hidden dark:block"></i>
+    </button>
+  </div>
+
   <script>
+    // Fungsi Toggle Dark Mode dengan LocalStorage
+    function toggleDarkMode() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
     // URL Web App Google Apps Script Kamu
     const apiURL = 'https://script.google.com/macros/s/AKfycbz4kCowral5gYkxpLbMYRsvd14ECVqSeOh4NhThEU7DPOFxFR4Zb4Ck2aHkfxB72wgT/exec';
 
@@ -112,39 +146,39 @@
       container.innerHTML = '';
 
       if (list.length === 0) {
-        container.innerHTML = `<div class="bg-white p-8 text-center rounded-2xl text-xs text-gray-400">Belum ada pesan dari warga.</div>`;
+        container.innerHTML = `<div class="bg-white dark:bg-gray-800 p-8 text-center rounded-2xl text-xs text-gray-400 dark:text-gray-500">Belum ada pesan dari warga.</div>`;
         return;
       }
 
       list.forEach((item, index) => {
         const isDibalas = item.status === 'Sudah Dibalas' || item.balasan;
-        const badgeColor = isDibalas ? 'bg-blue-100 text-blue-700' : 'bg-amber-100 text-amber-700';
+        const badgeColor = isDibalas ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300' : 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300';
         const statusText = isDibalas ? '✓✓ Sudah Dibalas' : '• Belum Dibalas';
 
         const html = `
-          <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-200 space-y-3">
+          <div class="bg-white dark:bg-gray-800 p-5 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 space-y-3 transition-colors">
             <div class="flex justify-between items-start">
               <div>
                 <span class="text-[10px] font-bold px-2 py-0.5 rounded-md ${badgeColor}">${statusText}</span>
-                <h4 class="font-bold text-sm text-gray-900 mt-1">${item.nama} <span class="text-xs font-normal text-gray-400">(${item.email})</span></h4>
-                <p class="text-[10px] text-gray-400">Token: <strong class="text-emerald-600 font-mono">${item.token}</strong> | ${item.tanggal}</p>
+                <h4 class="font-bold text-sm text-gray-900 dark:text-white mt-1">${item.nama} <span class="text-xs font-normal text-gray-400 dark:text-gray-500">(${item.email})</span></h4>
+                <p class="text-[10px] text-gray-400 dark:text-gray-500">Token: <strong class="text-emerald-600 dark:text-emerald-400 font-mono">${item.token}</strong> | ${item.tanggal}</p>
               </div>
             </div>
 
             <!-- Isi Pesan Warga -->
-            <div class="bg-gray-50 p-3 rounded-xl text-xs text-gray-700 border border-gray-100">
-              <strong class="text-gray-900">Pesan:</strong> ${item.pesan}
+            <div class="bg-gray-50 dark:bg-gray-700/50 p-3 rounded-xl text-xs text-gray-700 dark:text-gray-200 border border-gray-100 dark:border-gray-600">
+              <strong class="text-gray-900 dark:text-white">Pesan:</strong> ${item.pesan}
             </div>
 
             <!-- Tanggapan Admin -->
             ${isDibalas ? `
-              <div class="bg-emerald-50 p-3 rounded-xl text-xs text-emerald-900 border border-emerald-100">
-                <strong class="text-emerald-700"><i class="fa-solid fa-reply"></i> Balasan Admin:</strong> ${item.balasan}
+              <div class="bg-emerald-50 dark:bg-emerald-950/40 p-3 rounded-xl text-xs text-emerald-900 dark:text-emerald-200 border border-emerald-100 dark:border-emerald-800/50">
+                <strong class="text-emerald-700 dark:text-emerald-400"><i class="fa-solid fa-reply"></i> Balasan Admin:</strong> ${item.balasan}
               </div>
             ` : `
               <!-- Form Balas jika Belum Dibalas -->
               <div class="pt-2 space-y-2">
-                <textarea id="reply-${item.token}" rows="2" placeholder="Tuliskan balasan/tanggapan untuk warga..." class="w-full p-2.5 text-xs rounded-xl border border-gray-300 focus:outline-none focus:border-emerald-500"></textarea>
+                <textarea id="reply-${item.token}" rows="2" placeholder="Tuliskan balasan/tanggapan untuk warga..." class="w-full p-2.5 text-xs rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500"></textarea>
                 <button onclick="kirimBalasan('${item.token}')" id="btnReply-${item.token}" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1">
                   <i class="fa-solid fa-paper-plane text-[10px]"></i> Kirim Balasan
                 </button>
